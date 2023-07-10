@@ -1,0 +1,85 @@
+﻿@using Infrastructure.Dtos.Post;
+@model Infrastructure.Dtos.Post.PostUpdateDto
+
+@{
+    Layout = Context.Request.Headers["X-Requested-With"] == "XMLHttpRequest" ? null : "_Layout";
+    ViewData["Title"] = "Edit";
+    ViewData["ActiveItem"] = "post";
+}
+
+<h1>@Infrastructure.Helpers.Translator.TranslateText("","Edit")</h1><hr>
+
+<h4>@Infrastructure.Helpers.Translator.TranslateText("","Post")</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data" class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group mb-3 col-sm-6 col-md-5 col-xxl-4">
+                <img src="/File/GetImage/@Model.MainFileId?Width=150&Height=100" class="img-fluid mb-3" />
+                <br />
+                <label asp-for="File" class="control-label"></label>
+                <input asp-for="File" class="form-control" />
+                <span asp-validation-for="File" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3 col-sm-6 col-md-5 col-xxl-4">
+                <label asp-for="TitleAr" class="control-label"></label>
+                <input asp-for="TitleAr" class="form-control" />
+                <span asp-validation-for="TitleAr" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3 col-sm-6 col-md-5 col-xxl-4">
+                <label asp-for="TitleEn" class="control-label"></label>
+                <input asp-for="TitleEn" class="form-control" />
+                <span asp-validation-for="TitleEn" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3 col-sm-6 col-md-5 col-xxl-4">
+                <label asp-for="BreakingFrom" class="control-label"></label>
+                <input asp-for="BreakingFrom" class="form-control" />
+                <span asp-validation-for="BreakingFrom" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3 col-sm-6 col-md-5 col-xxl-4">
+                <label asp-for="BreakingTo" class="control-label"></label>
+                <input asp-for="BreakingTo" class="form-control" />
+                <span asp-validation-for="BreakingTo" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="PostType" />
+            <input type="hidden" asp-for="MainFileId" />
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group mb-3 col-sm-6 col-md-5 col-xxl-4">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    @foreach (var Paragraph in Model.Paragraphs)
+    {
+        <div class="col-12">
+            @{
+                await Html.RenderPartialAsync("UpdateParagraph", new PostParagraphUpdateDto() { 
+                    PostId = Model.Id,
+                    FileId = Paragraph.FileId,
+                    TitleAr = Paragraph.TitleAr,
+                    TitleEn = Paragraph.TitleEn,
+                    ContentAr = Paragraph.ContentAr,
+                    ContentEn = Paragraph.ContentEn
+                });
+            }
+        </div>
+    }
+
+    <div class="col-12">
+        @{
+            await Html.RenderPartialAsync("CreateParagraph", new PostParagraphCreateDto() { PostId = Model.Id});
+        }
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">@Infrastructure.Helpers.Translator.TranslateText("","Back to List")</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

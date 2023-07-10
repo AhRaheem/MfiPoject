@@ -1,0 +1,271 @@
+﻿@{ var EmbdedFilesQuery = Guid.NewGuid(); }
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - Web</title>
+	@*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/Web.styles.css" asp-append-version="true" />*@
+	<!-- Favicon -->
+	<!-- <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" /> -->
+	<link rel="shortcut icon" type="image/x-icon" href="/files/web/favicon-lightmode.ico" sizes="any"
+		  media="(prefers-color-scheme: light)" />
+	<link rel="shortcut icon" type="image/x-icon" href="/files/web/favicon-darkmode.ico" sizes="any"
+		  media="(prefers-color-scheme: dark)" />
+
+	<link rel="stylesheet" href="/css/bootstrap.min.css?@EmbdedFilesQuery">
+	<link rel="stylesheet" href="/css/all.min.css?@EmbdedFilesQuery">
+
+	<!-- Fonts -->
+	<link rel="stylesheet" href="/css/fonts.css?@EmbdedFilesQuery">
+
+	<!-- Custom Stylesheet -->
+	<link rel="stylesheet" href="/css/style.css?@EmbdedFilesQuery">
+</head>
+
+<body class="@((Context.Request.Cookies["Lang"] ?? "En") == "Ar" ? "c-rtl" : "")">
+
+	<!-- Main Section -->
+	<main class="main">
+
+		<div class="main-grid">
+			<!-- Side Navbar -->
+			<div class="side-nav">
+				<nav class="navbar c-navbar">
+					<div class="content-wrapper">
+						<div class="navbar-header">
+							<a class="navbar-brand" href="#">
+								<img src="/img/logo.svg" alt="">
+							</a>
+							<h6 class="navbar-title d-none d-lg-block mb-2">
+								<span>
+									صندوق تكريم شهداء وضحايا ومفقودي
+									ومصابي العمليات
+									الحربية والارهابية والامنية وأسرهم
+								</span>
+							</h6>
+						</div>
+						<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+								data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+						<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+							 aria-labelledby="offcanvasNavbarLabel">
+							<div class="offcanvas-header">
+								<h6 class="navbar-title">
+									<span>
+										صندوق تكريم شهداء وضحايا ومفقودي ومصابي العمليات
+										الحربية والارهابية والامنية وأسرهم
+									</span>
+								</h6>
+								<button type="button" class="btn-close close-white" data-bs-dismiss="offcanvas"
+										aria-label="Close"></button>
+							</div>
+							<div class="offcanvas-body">
+								<div class="scrollable">
+									<ul class="navbar-nav">
+										<li class="nav-item">
+											<a class="nav-link @(ViewBag.ActiveItem == "home"?"active":"")" asp-controller="home" asp-action="index">
+												<div class="icon dashboard-secondary"></div>
+												<span>@Infrastructure.Helpers.Translator.TranslateText("","Main")</span>
+											</a>
+										</li>
+										@if (User.IsInRole("Admin") || User.IsInRole("NewsEditor") || User.IsInRole("NewsPublisher"))
+										{
+											<li class="nav-item">
+												<a class="nav-link @(ViewBag.ActiveItem == "news"?"active":"")" asp-controller="Post" asp-action="Index" asp-route-type="0">
+													<div class="icon envelope-secondary"></div>
+													<span>@Infrastructure.Helpers.Translator.TranslateText("","News")</span>
+												</a>
+											</li>
+
+											<li class="nav-item">
+												<a class="nav-link @(ViewBag.ActiveItem == "protocols"?"active":"")" asp-controller="Post" asp-action="Index" asp-route-type="1">
+													<div class="icon envelope-secondary"></div>
+													<span>@Infrastructure.Helpers.Translator.TranslateText("","Protocols")</span>
+												</a>
+											</li>
+
+											<li class="nav-item">
+												<a class="nav-link @(ViewBag.ActiveItem == "achievements"?"active":"")" asp-controller="Post" asp-action="Index" asp-route-type="2">
+													<div class="icon envelope-secondary"></div>
+													<span>@Infrastructure.Helpers.Translator.TranslateText("","Achievements")</span>
+												</a>
+											</li>
+										}
+
+										@if (User.IsInRole("Admin"))
+										{
+											<li class="nav-item">
+												<a class="nav-link @(ViewBag.ActiveItem == "services"?"active":"")" asp-controller="Post" asp-action="Index" asp-route-type="3">
+													<div class="icon envelope-secondary"></div>
+													<span>@Infrastructure.Helpers.Translator.TranslateText("","Services")</span>
+												</a>
+											</li>
+										}
+
+										@if (User.IsInRole("Admin") || User.IsInRole("GalleryEditor") || User.IsInRole("GalleryPublisher"))
+										{
+											<li class="nav-item">
+												<a class="nav-link @(ViewBag.ActiveItem == "gallery"?"active":"")" asp-controller="Gallery" asp-action="Index">
+													<div class="icon envelope-secondary"></div>
+													<span>@Infrastructure.Helpers.Translator.TranslateText("","Gallery")</span>
+												</a>
+											</li>
+										}
+
+										@if (User.IsInRole("Admin"))
+										{
+											<li class="nav-item">
+												<a class="nav-link @(ViewBag.ActiveItem == "partnercategory"?"active":"")" asp-controller="PartnerCategory" asp-action="Index">
+													<div class="icon envelope-secondary"></div>
+													<span>@Infrastructure.Helpers.Translator.TranslateText("","Partner Category")</span>
+												</a>
+											</li>
+										}
+
+										@if (User.IsInRole("Admin"))
+										{
+											<li class="nav-item">
+												<a class="nav-link @(ViewBag.ActiveItem == "partner"?"active":"")" asp-controller="Partner" asp-action="Index">
+													<div class="icon envelope-secondary"></div>
+													<span>@Infrastructure.Helpers.Translator.TranslateText("","Partner")</span>
+												</a>
+											</li>
+										}
+
+										@if (User.IsInRole("Admin"))
+										{
+											<li class="nav-item">
+												<a class="nav-link @(ViewBag.ActiveItem == "profileinfo"?"active":"")" asp-controller="ProfileInfo" asp-action="Index">
+													<div class="icon envelope-secondary"></div>
+													<span>@Infrastructure.Helpers.Translator.TranslateText("","ProfileInfo")</span>
+												</a>
+											</li>
+										}
+
+										@if (User.IsInRole("Admin"))
+										{
+											<li class="nav-item">
+												<a class="nav-link @(ViewBag.ActiveItem == "relatedwebsite"?"active":"")" asp-controller="RelatedWebsite" asp-action="Index">
+													<div class="icon trophy-secondary"></div>
+													<span>@Infrastructure.Helpers.Translator.TranslateText("","Related Website")</span>
+												</a>
+											</li>
+										}
+
+										@if (User.IsInRole("Admin"))
+										{
+											<li class="nav-item">
+												<a class="nav-link @(ViewBag.ActiveItem == "aboutus"?"active":"")" asp-controller="RelatedWebsite" asp-action="Index">
+													<div class="icon trophy-secondary"></div>
+													<span>@Infrastructure.Helpers.Translator.TranslateText("","About Us")</span>
+												</a>
+											</li>
+										}
+
+										@if(User.IsInRole("Admin"))
+										{
+											<li class="nav-item">
+												<a class="nav-link @(ViewBag.ActiveItem == "user"?"active":"")" asp-controller="User" asp-action="Index">
+													<div class="icon trophy-secondary"></div>
+													<span>@Infrastructure.Helpers.Translator.TranslateText("","Users")</span>
+												</a>
+											</li>
+										}
+
+									</ul>
+								</div>
+							</div>
+							<div class="offcanvas-footer">
+								<div class="dropdown lang-dropdown">
+									<button class="btn lang-btn" type="button" data-bs-toggle="dropdown"
+											aria-expanded="false">
+										<div class="lang-icon"></div>
+										<span>@(Context.Request.Cookies["Lang"] ?? "En")</span>
+									</button>
+									<ul class="dropdown-menu">
+										<li><a class="dropdown-item active" href="/Language/ChangeLang/Ar?ReturnUrl=@Context.Request.Path">عربي</a></li>
+										<li><a class="dropdown-item" href="/Language/ChangeLang/En?ReturnUrl=@Context.Request.Path">English</a></li>
+									</ul>
+								</div>
+								<a class="login-btn" asp-controller="account" asp-action="logout" role="button">
+									<div class="login-icon"></div>
+									<span>@Infrastructure.Helpers.Translator.TranslateText("","Logout")</span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</nav>
+			</div>
+
+			<!-- Main Page Content -->
+			<div class="main-content section-spacing">
+				@RenderBody()
+			</div>
+		</div>
+	</main>
+	<script src="/lib/jquery/dist/jquery.js?@EmbdedFilesQuery"></script>
+	<script src="/lib/jquery/dist/jquery.form.js?@EmbdedFilesQuery"></script>
+	<script src="/js/popper.min.js?@EmbdedFilesQuery"></script>
+	<script src="/js/bootstrap.min.js?@EmbdedFilesQuery"></script>
+	<script src="/js/site.js?@EmbdedFilesQuery"></script>
+	@await RenderSectionAsync("Scripts", required: false)
+
+</body>
+
+<@*body> <header>
+		 <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+		 <div class="container-fluid">
+		 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Web</a>
+		 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+		 aria-expanded="false" aria-label="Toggle navigation">
+		 <span class="navbar-toggler-icon"></span>
+		 </button>
+		 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+		 <ul class="navbar-nav flex-grow-1">
+		 <li class="nav-item">
+		 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+		 </li>
+		 <li class="nav-item">
+		 <a class="nav-link text-dark" asp-area="" asp-controller="Post" asp-action="Index">Post</a>
+		 </li>
+		 <li class="nav-item">
+		 <a class="nav-link text-dark" asp-area="" asp-controller="Gallery" asp-action="Index">Gallery</a>
+		 </li>
+		 <li class="nav-item">
+		 <a class="nav-link text-dark" asp-area="" asp-controller="Partner" asp-action="Index">Partner</a>
+		 </li>
+		 <li class="nav-item">
+		 <a class="nav-link text-dark" asp-area="" asp-controller="PartnerCategory" asp-action="Index">PartnerCategory</a>
+		 </li>
+		 <li class="nav-item">
+		 <a class="nav-link text-dark" asp-area="" asp-controller="ProfileInfo" asp-action="Index">ProfileInfo</a>
+		 </li>
+		 <li class="nav-item">
+		 <a class="nav-link text-dark" asp-area="" asp-controller="RelatedWebsite" asp-action="Index">RelatedWebsite</a>
+		 </li>
+		 </ul>
+		 </div>
+		 </div>
+		 </nav>
+		 </header>
+		 <div class="container">
+		 <main role="main" class="pb-3">
+		 @RenderBody()
+		 </main>
+		 </div>
+		 <footer class="border-top footer text-muted">
+		 <div class="container">
+		 &copy; 2023 - Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+		 </div>
+		 </footer>
+		 <script src="~/lib/jquery/dist/jquery.min.js"></script>
+		 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+		 <script src="~/js/site.js" asp-append-version="true"></script>
+		 @await RenderSectionAsync("Scripts", required: false)
+		 </body>*@
+</html>

@@ -1,0 +1,130 @@
+﻿@model Infrastructure.Dtos.Post.PostDto
+
+@{
+    Layout = Context.Request.Headers["X-Requested-With"] == "XMLHttpRequest" ? null : "_Layout";
+    ViewData["Title"] = "Details";
+    var PostType = Context.Request.Query["Type"];
+    ViewData["ActiveItem"] = PostType == "0" ? "news" : PostType == "1" ? "protocols" : PostType == "2" ? "achievements" : PostType == "3" ? "services" : "";
+}
+
+<h1>@Infrastructure.Helpers.Translator.TranslateText("","Details")</h1>
+<hr>
+
+<div class="row">
+    <div class="col-12 text-center">
+        <img src="/File/GetImage/@Model.MainFileId?Width=800&Height=350" class="img-fluid" />
+    </div>
+    <div class="col-12 col-sm6">
+        <label class="fw-bold">@Infrastructure.Helpers.Translator.TranslateText("","TitleEn"):</label> <label>@Model.TitleEn</label>
+    </div>
+    <div class="col-12 col-sm6 text-end">
+        <label class="fw-bold">@Infrastructure.Helpers.Translator.TranslateText("","TitleAr"):</label> <label>@Model.TitleAr</label>
+    </div>
+    <hr/>
+</div>
+
+
+<div class="row">
+    @foreach (var Paragraph in Model.Paragraphs)
+    {
+        <div class="col-12">
+            <div class="table-responsive mb-3">
+                <div class="c-table" role="table">
+                    <div class="thead" role="rowgroup">
+                        <div class="tr" role="row">
+                            <div class="th" role="columnheader">@Paragraph.TitleEn - @Paragraph.TitleAr</div>
+                        </div>
+                    </div>
+                    <div class="tbody" role="rowgroup">
+
+                        <div class="tr" role="row">
+                            <div class="td" role="cell">
+                                <p class="mb-2">@Paragraph.ContentEn</p>
+                                <p class="mb-2">@Paragraph.ContentAr</p>
+                            </div>
+                            <div class="td" role="cell">
+                                <img src="/File/GetImage/@Paragraph.FileId?Width=300&Height=120" class="img-fluid" />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="table-responsive mb-3">
+            <div class="c-table" role="table">
+                <div class="thead" role="rowgroup">
+                    <div class="tr" role="row">
+                        <div class="th" role="columnheader">@Infrastructure.Helpers.Translator.TranslateText("","Affiliate Laws")</div>
+                    </div>
+                </div>
+                <div class="tbody" role="rowgroup">
+                    @foreach (var item in Model.AffiliateLaws)
+                    {
+                        <div class="tr" role="row">
+                            <div class="td" role="cell">
+                                <p class="mb-2">@item.NameEn</p>
+                                <p class="mb-2">@item.NameAr</p>
+                            </div>
+                            <div class="td" role="cell">
+                                <img src="/File/GetImage/@item.FileId?Width=300&Height=120" class="img-fluid" />
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        @if (Model.PostState == Core.Enums.PostState.Published)
+        {
+            <h3 class="fw-bold text-center">Approved</h3>
+        }
+        else
+        {
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">@Infrastructure.Helpers.Translator.TranslateText("","Reject")</button>
+            <form asp-action="Publish" class="d-inline me-3 ms-3">
+                <input type="hidden" asp-for="Id"/>
+                <button type="submit" class="btn btn-success">@Infrastructure.Helpers.Translator.TranslateText("","Publish")</button>
+            </form>
+        }
+    </div>
+</div>
+
+@if (Model.PostState != Core.Enums.PostState.Published)
+{
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">@Infrastructure.Helpers.Translator.TranslateText("","Reject Post")</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form asp-action="Reject">
+                        <input type="hidden" asp-for="Id" />
+                        <h4>@Infrastructure.Helpers.Translator.TranslateText("","Reason")</h4>
+                        <div class="textarea-container mb-3">
+                            <textarea asp-for="RejectReason" rows="10"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary"></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+}
+

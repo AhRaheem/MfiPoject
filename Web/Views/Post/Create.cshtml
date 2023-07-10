@@ -1,0 +1,59 @@
+﻿@using Core.Enums;
+@model Infrastructure.Dtos.Post.PostCreateDto
+
+@{
+    Layout = Context.Request.Headers["X-Requested-With"] == "XMLHttpRequest" ? null : "_Layout";
+    ViewData["Title"] = "Create";
+    //var PostType = Context.Request.Query["PostType"];
+    //var ModelPostType = PostType == 0 ? Core.Enums.PostType.News : PostType == 1 ? Core.Enums.PostType.Protocols : PostType == 2 ? Core.Enums.PostType.Achievements : PostType == 3 ? Core.Enums.PostType.Service : Core.Enums.PostType.News;
+    ViewData["ActiveItem"] = "post";
+}
+
+<h1>@Infrastructure.Helpers.Translator.TranslateText("","Create")</h1><hr>
+
+<h4>@Infrastructure.Helpers.Translator.TranslateText("","Post")</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create" enctype="multipart/form-data" class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group mb-3 col-sm-6 col-md-5 col-xxl-4">
+                <label asp-for="File" class="control-label"></label>
+                <input asp-for="File" class="form-control" />
+                <span asp-validation-for="File" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3 col-sm-6 col-md-5 col-xxl-4">
+                <label asp-for="TitleAr" class="control-label"></label>
+                <input asp-for="TitleAr" class="form-control" />
+                <span asp-validation-for="TitleAr" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3 col-sm-6 col-md-5 col-xxl-4">
+                <label asp-for="TitleEn" class="control-label"></label>
+                <input asp-for="TitleEn" class="form-control" />
+                <span asp-validation-for="TitleEn" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3 col-sm-6 col-md-5 col-xxl-4">
+                <label asp-for="BreakingFrom" class="control-label"></label>
+                <input asp-for="BreakingFrom" class="form-control" />
+                <span asp-validation-for="BreakingFrom" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3 col-sm-6 col-md-5 col-xxl-4">
+                <label asp-for="BreakingTo" class="control-label"></label>
+                <input asp-for="BreakingTo" class="form-control" />
+                <span asp-validation-for="BreakingTo" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="PostType" value="@(Context.Request.Query["PostType"])" />
+            <div class="form-group mb-3 col-sm-6 col-md-5 col-xxl-4">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">@Infrastructure.Helpers.Translator.TranslateText("","Back to List")</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

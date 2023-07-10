@@ -1,0 +1,112 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\css\style.css.map" />
+    <None Include="wwwroot\fonts\HelveticaNeueLT Arabic 55 Roman.svg" />
+    <None Include="wwwroot\fonts\HelveticaNeueRegular.woff2" />
+    <None Include="wwwroot\fonts\Tajawal-Regular.svg" />
+    <None Include="wwwroot\img\accessibility.svg" />
+    <None Include="wwwroot\img\address-circle-lightred.svg" />
+    <None Include="wwwroot\img\arrow-left-dark-lg.svg" />
+    <None Include="wwwroot\img\arrow-left-red.svg" />
+    <None Include="wwwroot\img\arrow-left-secondary.svg" />
+    <None Include="wwwroot\img\arrow-left-w-lg.svg" />
+    <None Include="wwwroot\img\arrow-left-w.svg" />
+    <None Include="wwwroot\img\arrow-right-circle-lightgray.svg" />
+    <None Include="wwwroot\img\arrow-right-secondary.svg" />
+    <None Include="wwwroot\img\bell-w.svg" />
+    <None Include="wwwroot\img\chevron-down-primary.svg" />
+    <None Include="wwwroot\img\chevron-down-secondary.svg" />
+    <None Include="wwwroot\img\chevron-down-theme.svg" />
+    <None Include="wwwroot\img\chevron-down-white.svg" />
+    <None Include="wwwroot\img\chevron-left-circle-w.svg" />
+    <None Include="wwwroot\img\chevron-left-secondary.svg" />
+    <None Include="wwwroot\img\chevron-right-circle-w.svg" />
+    <None Include="wwwroot\img\chevron-right-secondary.svg" />
+    <None Include="wwwroot\img\chevron-up-primary.svg" />
+    <None Include="wwwroot\img\chevron-up-theme.svg" />
+    <None Include="wwwroot\img\close-w.svg" />
+    <None Include="wwwroot\img\contrast-secondary.svg" />
+    <None Include="wwwroot\img\contrast-w.svg" />
+    <None Include="wwwroot\img\cross-dark.svg" />
+    <None Include="wwwroot\img\dashboard-secondary.svg" />
+    <None Include="wwwroot\img\dashboard-white.svg" />
+    <None Include="wwwroot\img\dashboard.svg" />
+    <None Include="wwwroot\img\diagonal-arrow-left-w.svg" />
+    <None Include="wwwroot\img\diagonal-arrow-right-w.svg" />
+    <None Include="wwwroot\img\envelope-secondary.svg" />
+    <None Include="wwwroot\img\envelope-white.svg" />
+    <None Include="wwwroot\img\envelope.svg" />
+    <None Include="wwwroot\img\facebook.svg" />
+    <None Include="wwwroot\img\font-secondary.svg" />
+    <None Include="wwwroot\img\font-w.svg" />
+    <None Include="wwwroot\img\globe-dark-lg.svg" />
+    <None Include="wwwroot\img\globe-dark.svg" />
+    <None Include="wwwroot\img\globe-w.svg" />
+    <None Include="wwwroot\img\home-secondary.svg" />
+    <None Include="wwwroot\img\home-white.svg" />
+    <None Include="wwwroot\img\home.svg" />
+    <None Include="wwwroot\img\instagram.svg" />
+    <None Include="wwwroot\img\link-arrow-secondary.svg" />
+    <None Include="wwwroot\img\list-style-dash.svg" />
+    <None Include="wwwroot\img\logo.svg" />
+    <None Include="wwwroot\img\mail-circle-lightred.svg" />
+    <None Include="wwwroot\img\mail-dark.svg" />
+    <None Include="wwwroot\img\mail.svg" />
+    <None Include="wwwroot\img\money-circle-red.svg" />
+    <None Include="wwwroot\img\phone-circle-lightred.svg" />
+    <None Include="wwwroot\img\phone.svg" />
+    <None Include="wwwroot\img\rectangle-bg-shape.svg" />
+    <None Include="wwwroot\img\related-links-img-1.svg" />
+    <None Include="wwwroot\img\related-links-img-2.svg" />
+    <None Include="wwwroot\img\related-links-img-3.svg" />
+    <None Include="wwwroot\img\related-links-img-4.svg" />
+    <None Include="wwwroot\img\reset-dark.svg" />
+    <None Include="wwwroot\img\reset-w.svg" />
+    <None Include="wwwroot\img\resize-gray.svg" />
+    <None Include="wwwroot\img\screen-reader-secondary.svg" />
+    <None Include="wwwroot\img\screen-reader-w.svg" />
+    <None Include="wwwroot\img\search.svg" />
+    <None Include="wwwroot\img\trash-red.svg" />
+    <None Include="wwwroot\img\trophy-secondary.svg" />
+    <None Include="wwwroot\img\trophy-white.svg" />
+    <None Include="wwwroot\img\trophy.svg" />
+    <None Include="wwwroot\img\user-dark.svg" />
+    <None Include="wwwroot\img\user-w.svg" />
+    <None Include="wwwroot\img\view-circle-red.svg" />
+    <None Include="wwwroot\img\youtube.svg" />
+    <None Include="wwwroot\js\app.js" />
+    <None Include="wwwroot\js\bootstrap.min.js" />
+    <None Include="wwwroot\js\popper.min.js" />
+    <None Include="wwwroot\js\site.js" />
+    <None Include="wwwroot\webfonts\fa-brands-400.svg" />
+    <None Include="wwwroot\webfonts\fa-brands-400.woff2" />
+    <None Include="wwwroot\webfonts\fa-regular-400.svg" />
+    <None Include="wwwroot\webfonts\fa-regular-400.woff2" />
+    <None Include="wwwroot\webfonts\fa-solid-900 %281%29.svg" />
+    <None Include="wwwroot\webfonts\fa-solid-900 %281%29.woff2" />
+    <None Include="wwwroot\webfonts\fa-solid-900.svg" />
+    <None Include="wwwroot\webfonts\fa-solid-900.woff2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.16" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.16">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.13" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

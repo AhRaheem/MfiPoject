@@ -1,0 +1,21 @@
+﻿@{
+	ViewData["Title"] = "Home Page";
+	ViewData["ActiveItem"] = "home";
+}
+
+<h1>@Infrastructure.Helpers.Translator.TranslateText("","Dashboard")</h1>
+<hr>
+<div class="card-container">
+	<a class="card" asp-controller="RelatedWebsite" asp-action="Index">
+		<div class="icon envelope"></div>
+		<span>@Infrastructure.Helpers.Translator.TranslateText("","About Us")</span>
+	</a>
+	<a class="card" asp-controller="Post" asp-action="Index" asp-route-type="0">
+		<div class="icon trophy"></div>
+		<span>@Infrastructure.Helpers.Translator.TranslateText("","News")</span>
+	</a>
+	<a class="card" asp-controller="Gallery" asp-action="Index">
+		<div class="icon image"></div>
+		<span>@Infrastructure.Helpers.Translator.TranslateText("","Gallery")</span>
+	</a>
+</div>

@@ -1,0 +1,64 @@
+﻿@model Infrastructure.Dtos.User.UserCreateDto
+
+@{
+    Layout = Context.Request.Headers["X-Requested-With"] == "XMLHttpRequest" ? null : "_Layout";
+    ViewData["Title"] = "Create";
+}
+
+<h1>@Infrastructure.Helpers.Translator.TranslateText("","Create")</h1><hr>
+
+<h4>@Infrastructure.Helpers.Translator.TranslateText("","User")</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data" class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group mb-3 col-sm-6 col-md-5 col-xxl-4">
+                <label asp-for="UserName" class="control-label"></label>
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3 col-sm-6 col-md-5 col-xxl-4">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3 col-sm-6 col-md-5 col-xxl-4">
+                <label asp-for="IsAdmin" class="control-label"></label>
+                <input asp-for="IsAdmin" class="form-control" />
+                <span asp-validation-for="IsAdmin" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3 col-sm-6 col-md-5 col-xxl-4">
+                <label asp-for="IsNewsPublisher" class="control-label"></label>
+                <input asp-for="IsNewsPublisher" class="form-control" />
+                <span asp-validation-for="IsNewsPublisher" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3 col-sm-6 col-md-5 col-xxl-4">
+                <label asp-for="IsNewsEditor" class="control-label"></label>
+                <input asp-for="IsNewsEditor" class="form-control" />
+                <span asp-validation-for="IsNewsEditor" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3 col-sm-6 col-md-5 col-xxl-4">
+                <label asp-for="IsGalleryPublisher" class="control-label"></label>
+                <input asp-for="IsGalleryPublisher" class="form-control" />
+                <span asp-validation-for="IsGalleryPublisher" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3 col-sm-6 col-md-5 col-xxl-4">
+                <label asp-for="IsGalleryEditor" class="control-label"></label>
+                <input asp-for="IsGalleryEditor" class="form-control" />
+                <span asp-validation-for="IsGalleryEditor" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3 col-sm-6 col-md-5 col-xxl-4">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">@Infrastructure.Helpers.Translator.TranslateText("","Back to List")</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

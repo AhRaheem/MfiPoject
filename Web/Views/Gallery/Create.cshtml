@@ -1,0 +1,50 @@
+﻿@model Infrastructure.Dtos.Gallery.GalleryCreateDto
+
+@{
+    Layout = Context.Request.Headers["X-Requested-With"] == "XMLHttpRequest" ? null : "_Layout";
+    ViewData["Title"] = "Create";
+    ViewData["ActiveItem"] = "gallery";
+}
+
+<h1>@Infrastructure.Helpers.Translator.TranslateText("","Create")</h1><hr>
+
+<h4>@Infrastructure.Helpers.Translator.TranslateText("","Gallery")</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data" class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group mb-3 col-sm-6 col-md-5 col-xxl-4">
+                <label asp-for="File" class="control-label"></label>
+                <input asp-for="File" class="form-control" />
+                <span asp-validation-for="File" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3 col-sm-6 col-md-5 col-xxl-4">
+                <label asp-for="TitleAr" class="control-label"></label>
+                <input asp-for="TitleAr" class="form-control" />
+                <span asp-validation-for="TitleAr" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3 col-sm-6 col-md-5 col-xxl-4">
+                <label asp-for="TitleEn" class="control-label"></label>
+                <input asp-for="TitleEn" class="form-control" />
+                <span asp-validation-for="TitleEn" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check my-3">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsPublished" /> @Html.DisplayNameFor(model => model.IsPublished)
+                </label>
+            </div>
+            <div class="form-group mb-3 col-sm-6 col-md-5 col-xxl-4">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">@Infrastructure.Helpers.Translator.TranslateText("","Back to List")</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,168 @@
+﻿@model Infrastructure.Models.PaginatedList<Infrastructure.Dtos.Gallery.GalleryDto>
+
+@{
+	ViewData["Title"] = "Index";
+	ViewData["ActiveItem"] = "gallery";
+}
+
+<h1>@Infrastructure.Helpers.Translator.TranslateText("","Index")</h1>
+<hr>
+
+<p>
+	<form method="get" asp-action="index" class="d-inline">
+		<input type="search" name="q" value="@Context.Request.Query["q"]" />
+	</form>
+	<a asp-action="Create" class="float-end btn btn-danger">@Infrastructure.Helpers.Translator.TranslateText("","Create New")</a>
+</p>
+
+
+@*<div class="accordion" id="accordionExample">
+	@foreach (var item in Model.Items)
+	{
+		<div class="accordion-item">
+			<h2 class="accordion-header">
+				<button class="accordion-button" type="button" data-bs-toggle="collapse"
+					data-bs-target="#@item.Id" aria-expanded="true" aria-controls="@item.Id">
+					<span>@item.TitleEn - @item.TitleAr</span>
+				</button>
+			</h2>
+			<div id="@item.Id" class="accordion-collapse collapse show"
+			 data-bs-parent="#accordionExample">
+				<div class="accordion-body">
+
+					<div class="row c-row gx-3 gy-2 gy-sm-1 mb-3">
+						<form asp-action="Edit" method="post" enctype="multipart/form-data" class="row">
+							<div class="col-12">
+								<h3>Gallery Info</h3>
+							</div>
+							<div class="col-sm-6 col-md-5 col-xxl-4">
+								<div class="form-group">
+									<label for="albumName" class="">Album Arabic Name</label>
+									<input class="form-control" id="albumName" type="text">
+								</div>
+							</div>
+							<div class="col-sm-6 col-md-5 col-xxl-4">
+								<div class="form-group">
+									<label for="albumName" class="">Album English Name</label>
+									<input class="form-control" id="albumName" type="text">
+								</div>
+							</div>
+							<div class="col-sm-6 col-md-5 col-xxl-4">
+								<img src="/File/GetImage/@item.MainFileId?Width=150&Height=100" class="img-fluid mb-3" />
+								<br/>
+								<div class="form-group">
+									<label for="formFile-1">Main Image</label>
+									<input name="" class="form-control" id="formFile-1" type="file">
+								</div>
+							</div>
+							<div class="col-sm-6 col-md-5 col-xxl-4">
+								<div class="form-group">
+									<button type="submit" class="btn btn-primary">Save</button>
+								</div>
+							</div>
+						</form>
+					</div>
+
+					<div class="row c-row gx-3 gy-2 gy-sm-1 mb-3">
+						<form method="post" class="d-inline" asp-action="Delete" asp-route-id="@item.Id" onsubmit="return confirm('@Infrastructure.Helpers.Translator.TranslateText("","Are you sure you want to delete this?")');">
+							<button class="btn btn-link p-0" type="submit">Delete</button>
+						</form>
+					</div>
+
+					
+
+					<div class="row c-row">
+						<div class="col-12 px-0">
+							<div class="row c-row">
+								<div class="col-12">
+									<div class="table-responsive mb-3">
+										<div class="c-table" role="table">
+											<div class="tbody" role="rowgroup">
+												@foreach (var GlryItem in item.Items)
+												{
+													<div class="tr" role="row">
+														<div class="td" role="cell">
+															<p class="mb-2">
+																<img class="img-fluid" src="/File/GetImage/@GlryItem.FileId?Width=150&Height=100" />
+															</p>
+														</div>
+														<div class="td" role="cell">
+															<form method="post" class="d-inline" asp-action="Delete" asp-route-id="@GlryItem.Id" onsubmit="return confirm('@Infrastructure.Helpers.Translator.TranslateText("","Are you sure you want to delete this?")');">
+																<button type="submit" class="icon-btn">
+																	<div class="icon trash-red"></div>
+																</button>
+															</form>
+														</div>
+													</div>
+												}
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	}
+
+</div>*@
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Items.FirstOrDefault().MainFile)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Items.FirstOrDefault().TitleAr)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Items.FirstOrDefault().TitleEn)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Items.FirstOrDefault().IsPublished)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model.Items)
+		{
+			<tr>
+				<td>
+					<img src="/File/GetImage/@item.MainFileId?Width=150&Height=100" class="img-fluid" />
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.TitleAr)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.TitleEn)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.IsPublished)
+				</td>
+				<td>
+					<a asp-action="Edit" asp-route-id="@item.Id">@Infrastructure.Helpers.Translator.TranslateText("","Edit")</a> |
+					<a asp-action="CreateItem" asp-route-GalleryId="@item.Id">@Infrastructure.Helpers.Translator.TranslateText("","Add items")</a> |
+					<form method="post" class="d-inline" asp-action="Delete" asp-route-id="@item.Id" onsubmit="return confirm('@Infrastructure.Helpers.Translator.TranslateText("","Are you sure you want to delete this?")');">
+						<button class="btn btn-link p-0" type="submit">@Infrastructure.Helpers.Translator.TranslateText("","Delete")</button>
+					</form>
+				</td>
+			</tr>
+		}
+	</tbody>
+	<tfoot>
+		<tr>
+			<td>@Model.Items.Count / @Model.TotalCount</td>
+			<td>
+				@for (int i = 1; i == Model.TotalPages; i++)
+				{
+					<a class="btn btn-link ps-2 pe-2" asp-action="index" asp-route-q="@Context.Request.Query["q"]" asp-route-page="@i" asp-route-size="10">@i</a>
+				}
+			</td>
+		</tr>
+	</tfoot>
+</table>

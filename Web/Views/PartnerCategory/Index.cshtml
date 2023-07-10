@@ -1,0 +1,48 @@
+﻿@model Infrastructure.Models.PaginatedList<Infrastructure.Dtos.PartnerCategory.PartnerCategoryDto>
+
+@{
+    Layout = Context.Request.Headers["X-Requested-With"] == "XMLHttpRequest" ? null : "_Layout";
+    ViewData["Title"] = "Index";
+    ViewData["ActiveItem"] = "partnercategory";
+}
+
+<h1>@Infrastructure.Helpers.Translator.TranslateText("","Index")</h1><hr>
+
+<p>
+    <form method="get" asp-action="index" class="d-inline">
+        <input type="search" name="q" value="@Context.Request.Query["q"]" />
+    </form>
+    <a asp-action="Create" class="float-end btn btn-danger">@Infrastructure.Helpers.Translator.TranslateText("","Create New")</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Items.FirstOrDefault().NameAr)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Items.FirstOrDefault().NameEn)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Items) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameAr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameEn)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">@Infrastructure.Helpers.Translator.TranslateText("","Edit")</a> |
+                <form method="post" class="d-inline" asp-action="Delete" asp-route-id="@item.Id" onsubmit="return confirm('@Infrastructure.Helpers.Translator.TranslateText("","Are you sure you want to delete this?")');">
+                                           <button class="btn btn-link p-0" type="submit">@Infrastructure.Helpers.Translator.TranslateText("","Delete")</button>
+                                        </form>
+            </td>
+        </tr>
+}
+    </tbody>
+
+</table>

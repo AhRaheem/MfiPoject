@@ -1,0 +1,84 @@
+﻿@model Infrastructure.Dtos.User.LoginViewModel
+
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>تسجيل الدخول</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/files/web/favicon-lightmode.ico" sizes="any"
+		  media="(prefers-color-scheme: light)" />
+	<link rel="shortcut icon" type="image/x-icon" href="/files/web/favicon-darkmode.ico" sizes="any"
+		  media="(prefers-color-scheme: dark)" />
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css?@Guid.NewGuid()">
+	<link rel="stylesheet" href="/css/all.min.css?@Guid.NewGuid()">
+
+	<!-- Fonts -->
+    <link rel="stylesheet" href="/css/fonts.css?@Guid.NewGuid()">
+
+	<!-- Custom Stylesheet -->
+	<link rel="stylesheet" href="/css/style.css?@Guid.NewGuid()">
+
+
+</head>
+
+<body class="@*c-rtl*@">
+
+    <!-- Main Section -->
+    <main class="main">
+
+        <div class="login-container">
+            <div class="card c-card login-card">
+                <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+                    <div class="card-header">
+                        <img src="/img/logo.svg" class="login-logo" alt="">
+                    </div>
+                    <div class="card-body">
+                        <div asp-validation-summary="All"></div>
+                        <div class="form-group mb-2">
+                            <label class="form-label" for="login-number">@Infrastructure.Helpers.Translator.TranslateText("","User Name")</label>
+                            <input asp-for="UserName" class="form-control" />
+                            <span asp-validation-for="UserName"></span>
+                        </div>
+                        <div class="d-flex flex-column">
+                            <div class="form-group mb-2">
+                                <label class="form-label" for="login-pass">@Infrastructure.Helpers.Translator.TranslateText("","Password")</label>
+                                <input asp-for="Password" class="form-control" />
+                            </div>
+                            <a asp-controller="Account" asp-action="ForgetPassword" class="text-decoration-none align-self-start link-secondary">@Infrastructure.Helpers.Translator.TranslateText("","Forget Password?")</a>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label style="font-size:18px">
+                                <input type="checkbox" asp-for="RememberMe" class="form-check-input"><span style="padding:0px 15px;">@Infrastructure.Helpers.Translator.TranslateText("","Remeber Me")</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="justify-all-center">
+                            <button type="submit" class="btn c-btn btn-theme-secondary">@Infrastructure.Helpers.Translator.TranslateText("","Signin")</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="/js/popper.min.js?@Guid.NewGuid()"></script>
+    <script src="/js/bootstrap.min.js?@Guid.NewGuid()"></script>
+</body>
+
+</html>
+
+

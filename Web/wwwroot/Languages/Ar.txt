@@ -1,0 +1,50 @@
+﻿User Name:اسم المستخدم
+UserName:اسم المستخدم
+Password:كلمة المرور
+Forget Password?:نسيت كلمة المرور؟
+Remember me:تذكرني
+Remeber Me:تذكرني
+Signin:تسجيل الدخول
+Dashboard:لوحة القيادة
+About Us:معلومات عنا
+News:أخبار
+Gallery:صالة عرض
+Main:رئيسي
+Protocols:البروتوكولات
+Achievements:إنجازات
+Services:خدمات
+Partner Category:فئة الشريك
+Partner:شريك
+ProfileInfo:معلومات الشخصي
+Related Website:موقع ذو صلة
+Users:المستخدمون
+Logout:تسجيل خروج
+Index:فِهرِس
+Create New: جديد
+File:ملف
+Type:النوع
+Arabic Title:عنوان عربي
+English Title:العنوان باللغة الإنجليزية
+State:حالة
+Arabic Name:الاسم العربي
+English Name:الاسم الانجليزي
+Published:نشرت
+Edit:يحرر
+Add items:إضافة عناصر
+Are you sure you want to delete this?:هل أنت متأكد أنك تريد حذف هذا؟
+Delete:مسح
+Category:فئة
+Website:موقع إلكتروني
+Value:قيمة
+FileId: الملف
+Link:رابط
+Name:اسم
+Email:بريد إلكتروني
+Is Admin:مدير
+Is News Publisher:ناشر أخبار
+Is News Editor:محرر أخبار
+Is Gallery Publisher: ناشر معرض
+Is Gallery Editor:محرر معرض
+Create:انشاء
+User:مستخدم
+Back to List:الرجوع للقائمة
