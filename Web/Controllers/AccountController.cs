@@ -1,4 +1,5 @@
 ﻿
+using Infrastructure.Dtos.Post;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Web.Controllers
@@ -7,9 +8,11 @@ namespace Web.Controllers
     public class AccountController : Controller
     {
         public readonly IUserService _userService;
-        public AccountController(IUserService userService)
+        private IValidator<LoginViewModel> _LoginValidator;
+        public AccountController(IUserService userService, IValidator<LoginViewModel> LoginValidator)
         {
             _userService = userService;
+            _LoginValidator = LoginValidator;
         }
     
         //
@@ -31,8 +34,8 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = "/")
         {
-			//return RedirectToAction("Index", "Home");
             ViewData["ReturnUrl"] = returnUrl;
+            var ValidRslt = await _LoginValidator.ValidateAsync(model);
             if (ValidRslt.IsValid)
             {
 

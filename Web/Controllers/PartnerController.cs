@@ -1,5 +1,6 @@
 ﻿
 
+using FluentValidation;
 using Infrastructure.Dtos.Partner;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -47,6 +48,8 @@ namespace Web.Controllers
 					return RedirectToAction(nameof(Index));
 			}
             ViewData["PartnerCategoryId"] = new SelectList(await _partnerCategoryService.GetList(), "Id", "NameAr");
+            if(!ValidRslt.IsValid)
+                ValidRslt.AddToModelState(this.ModelState);
             return View(Model);
 		}
 
@@ -63,13 +66,16 @@ namespace Web.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<ActionResult> Edit(PartnerUpdateDto Model)
 		{
-			if (ValidRslt.IsValid)
+            var ValidRslt = await _UpdateValidator.ValidateAsync(Model);
+            if (ValidRslt.IsValid)
 			{
 				var Rslt = await _partnerService.Update(Model);
 				if (Rslt)
 					return RedirectToAction(nameof(Index));
 			}
             ViewData["PartnerCategoryId"] = new SelectList(await _partnerCategoryService.GetList(), "Id", "NameAr");
+            if(!ValidRslt.IsValid)
+                ValidRslt.AddToModelState(this.ModelState);
             return View(Model);
 		}
 

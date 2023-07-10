@@ -1,6 +1,7 @@
 ﻿
 
 
+using FluentValidation;
 using Infrastructure.Dtos.PartnerCategory;
 
 namespace Web.Controllers
@@ -44,7 +45,9 @@ namespace Web.Controllers
 				if (Rslt)
 					return RedirectToAction(nameof(Index));
 			}
-			return View(Model);
+			if(!ValidRslt.IsValid)
+                ValidRslt.AddToModelState(this.ModelState);
+            return View(Model);
 		}
 
 		// GET: PartnerCategoryController/Edit/5
@@ -59,13 +62,16 @@ namespace Web.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<ActionResult> Edit(PartnerCategoryUpdateDto Model)
 		{
-			if (ValidRslt.IsValid)
+            var ValidRslt = await _UpdateValidator.ValidateAsync(Model);
+            if (ValidRslt.IsValid)
 			{
 				var Rslt = await _partnerService.Update(Model);
 				if (Rslt)
 					return RedirectToAction(nameof(Index));
 			}
-			return View(Model);
+			if(!ValidRslt.IsValid)
+                ValidRslt.AddToModelState(this.ModelState);
+            return View(Model);
 		}
 
 		// POST: PartnerCategoryController/Delete/5

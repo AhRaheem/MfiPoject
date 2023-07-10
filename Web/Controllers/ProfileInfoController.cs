@@ -1,5 +1,6 @@
 ﻿
 
+using FluentValidation;
 using Infrastructure.Dtos.ProfileInfo;
 
 namespace Web.Controllers
@@ -43,7 +44,9 @@ namespace Web.Controllers
 				if (Rslt)
 					return RedirectToAction(nameof(Index));
 			}
-			return View(Model);
+			if(!ValidRslt.IsValid)
+                ValidRslt.AddToModelState(this.ModelState);
+            return View(Model);
 		}
 
 		// GET: ProfileInfoController/Edit/5
@@ -58,13 +61,16 @@ namespace Web.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<ActionResult> Edit(ProfileInfoUpdateDto Model)
 		{
-			if (ValidRslt.IsValid)
+            var ValidRslt = await _UpdateValidator.ValidateAsync(Model);
+            if (ValidRslt.IsValid)
 			{
 				var Rslt = await _profileInfoService.Update(Model);
 				if (Rslt)
 					return RedirectToAction(nameof(Index));
 			}
-			return View(Model);
+			if(!ValidRslt.IsValid)
+                ValidRslt.AddToModelState(this.ModelState);
+            return View(Model);
 		}
 
 		// POST: ProfileInfoController/Delete/5

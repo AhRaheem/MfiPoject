@@ -15,12 +15,19 @@ namespace Web.Controllers
 		public readonly IGalleryService _galleryService;
         private IValidator<GalleryCreateDto> _CreateValidator;
         private IValidator<GalleryUpdateDto> _UpdateValidator;
+        private IValidator<GalleryItemCreateDto> _CreateItemValidator;
 
-        public GalleryController(IGalleryService galleryService, IValidator<GalleryCreateDto> CreateValidator , IValidator<GalleryUpdateDto> UpdateValidator)
+        public GalleryController(IGalleryService galleryService, 
+			IValidator<GalleryCreateDto> CreateValidator , 
+			IValidator<GalleryUpdateDto> UpdateValidator,
+			IValidator<GalleryItemCreateDto> CreateItemValidator
+
+            )
 		{
 			_galleryService = galleryService;
             _CreateValidator = CreateValidator;
             _UpdateValidator = UpdateValidator;
+			_CreateItemValidator= CreateItemValidator;
         }
 
 		// GET: GalleryController
@@ -48,7 +55,9 @@ namespace Web.Controllers
 				if (Rslt)
 					return RedirectToAction(nameof(Index));
 			}
-			return View(Model);
+			if(!ValidRslt.IsValid)
+                ValidRslt.AddToModelState(this.ModelState);
+            return View(Model);
 		}
 
 		// GET: GalleryController/Edit/5
@@ -71,7 +80,9 @@ namespace Web.Controllers
 				if (Rslt)
 					return RedirectToAction(nameof(Index));
 			}
-			return View(Model);
+			if(!ValidRslt.IsValid)
+                ValidRslt.AddToModelState(this.ModelState);
+            return View(Model);
 		}
 
 		// POST: GalleryController/Delete/5
@@ -98,6 +109,7 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> CreateItem(GalleryItemCreateDto Model)
         {
+            var ValidRslt = await _CreateItemValidator.ValidateAsync(Model);
             if (ValidRslt.IsValid)
             {
                 var Rslt = await _galleryService.CreateGalleryItem(Model);
@@ -106,6 +118,8 @@ namespace Web.Controllers
             }
             var Gallery = await _galleryService.GetByIdWithItems(Model.GalleryId);
             ViewData["GalleryInfo"] = Gallery;
+            if(!ValidRslt.IsValid)
+                ValidRslt.AddToModelState(this.ModelState);
             return View(Model);
         }
 

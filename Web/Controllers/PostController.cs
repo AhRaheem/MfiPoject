@@ -14,11 +14,15 @@ namespace Web.Controllers
         private IValidator<PostUpdateDto> _UpdateValidator;
         private IValidator<PostParagraphCreateDto> _ParagraphCreateDtoValidator;
         private IValidator<PostParagraphUpdateDto> _ParagraphUpdateDtoValidator;
+        private IValidator<PostAffiliateLawCreateDto> _AffiliateLawCreateDtoValidator;
+        private IValidator<PostAffiliateLawUpdateDto> _AffiliateLawUpdateDtoValidator;
         public PostController(IPostService postService, 
             IValidator<PostCreateDto> CreateValidator, 
             IValidator<PostUpdateDto> UpdateValidator, 
             IValidator<PostParagraphCreateDto> ParagraphCreateDtoValidator,
-            IValidator<PostParagraphUpdateDto> ParagraphUpdateDtoValidator
+            IValidator<PostParagraphUpdateDto> ParagraphUpdateDtoValidator,
+            IValidator<PostAffiliateLawCreateDto> AffiliateLawCreateDtoValidator,
+            IValidator<PostAffiliateLawUpdateDto> AffiliateLawUpdateDtoValidator
             )
 		{
 			_postService = postService;
@@ -47,14 +51,16 @@ namespace Web.Controllers
 		{
             Model.Id = Guid.NewGuid().ToString();
             var ValidRslt = await _CreateValidator.ValidateAsync(Model);
-            ValidRslt.AddToModelState(this.ModelState);
+            
             if (ValidRslt.IsValid) 
 			{
 				var Rslt = await _postService.Create(Model);
 				if (Rslt)
 					return RedirectToAction(nameof(Edit), new { Id = Model.Id });
 			}
-			return View(Model);
+            if(!ValidRslt.IsValid)
+                ValidRslt.AddToModelState(this.ModelState);
+            return View(Model);
 		}
 
 		// GET: PostController/Edit/5
@@ -76,7 +82,9 @@ namespace Web.Controllers
                 if (Rslt)
                     return RedirectToAction(nameof(Index), new { PostType = Model.PostType });
 			}
-			return View(Model);
+			if(!ValidRslt.IsValid)
+                ValidRslt.AddToModelState(this.ModelState);
+            return View(Model);
 		}
 
 		// POST: PostController/Delete/5
@@ -112,6 +120,8 @@ namespace Web.Controllers
             }
             var Post = await _postService.GetByIdWithParagraphs(Model.PostId);
             ViewData["PostInfo"] = Post;
+            if(!ValidRslt.IsValid)
+                ValidRslt.AddToModelState(this.ModelState);
             return View(Model);
         }
 
@@ -139,6 +149,8 @@ namespace Web.Controllers
             }
             var Post = await _postService.GetByIdWithParagraphs(Model.PostId);
             ViewData["PostInfo"] = Post;
+            if(!ValidRslt.IsValid)
+                ValidRslt.AddToModelState(this.ModelState);
             return View(Model);
         }
 
@@ -166,6 +178,7 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> CreateAffiliateLaw(PostAffiliateLawCreateDto Model)
         {
+            var ValidRslt = await _AffiliateLawCreateDtoValidator.ValidateAsync(Model);
             if (ValidRslt.IsValid)
             {
                 var Rslt = await _postService.CreatePostAffiliateLaw(Model);
@@ -174,6 +187,8 @@ namespace Web.Controllers
             }
             var Post = await _postService.GetByIdWithAffiliateLaws(Model.PostId);
             ViewData["PostInfo"] = Post;
+            if(!ValidRslt.IsValid)
+                ValidRslt.AddToModelState(this.ModelState);
             return View(Model);
         }
 

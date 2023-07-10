@@ -1,5 +1,6 @@
 ﻿
 
+using FluentValidation;
 using Infrastructure.Dtos.RelatedWebsite;
 
 namespace Web.Controllers
@@ -35,13 +36,16 @@ namespace Web.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<ActionResult> Create(RelatedWebsiteCreateDto Model)
 		{
-			if (ValidRslt.IsValid)
+            var ValidRslt = await _CreateValidator.ValidateAsync(Model);
+            if (ValidRslt.IsValid)
 			{
 				var Rslt = await _relatedWebsiteService.Create(Model);
 				if (Rslt)
 					return RedirectToAction(nameof(Index));
 			}
-			return View(Model);
+			if(!ValidRslt.IsValid)
+                ValidRslt.AddToModelState(this.ModelState);
+            return View(Model);
 		}
 
 		// GET: RelatedWebsiteController/Edit/5
@@ -56,13 +60,16 @@ namespace Web.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<ActionResult> Edit(RelatedWebsiteUpdateDto Model)
 		{
-			if (ValidRslt.IsValid)
+            var ValidRslt = await _UpdateValidator.ValidateAsync(Model);
+            if (ValidRslt.IsValid)
 			{
 				var Rslt = await _relatedWebsiteService.Update(Model);
 				if (Rslt)
 					return RedirectToAction(nameof(Index));
 			}
-			return View(Model);
+			if(!ValidRslt.IsValid)
+                ValidRslt.AddToModelState(this.ModelState);
+            return View(Model);
 		}
 
 		// POST: RelatedWebsiteController/Delete/5

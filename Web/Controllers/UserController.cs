@@ -1,5 +1,6 @@
 ﻿
 
+using FluentValidation;
 using Infrastructure.Dtos.User;
 
 
@@ -10,11 +11,16 @@ namespace Web.Controllers
 	{
 		public readonly IUserService _userService;
         private IValidator<UserCreateDto> _CreateValidator;
+        private IValidator<UserUpdateDto> _UpdateValidator;
 
-        public UserController(IUserService userService, IValidator<UserCreateDto> CreateValidator)
+        public UserController(IUserService userService, 
+			IValidator<UserCreateDto> CreateValidator,
+            IValidator<UserUpdateDto> UpdateValidator
+			)
 		{
 			_userService = userService;
             _CreateValidator = CreateValidator;
+			_UpdateValidator = UpdateValidator;
         }
 
 		// GET: UserController
@@ -42,7 +48,9 @@ namespace Web.Controllers
 				if (Rslt)
 					return RedirectToAction(nameof(Index));
 			}
-			return View(Model);
+			if(!ValidRslt.IsValid)
+                ValidRslt.AddToModelState(this.ModelState);
+            return View(Model);
 		}
 
 		// GET: UserController/Edit/5
@@ -57,13 +65,16 @@ namespace Web.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<ActionResult> Edit(UserUpdateDto Model)
 		{
-			if (ValidRslt.IsValid)
+            var ValidRslt = await _UpdateValidator.ValidateAsync(Model);
+            if (ValidRslt.IsValid)
 			{
 				var Rslt = await _userService.Update(Model);
 				if (Rslt)
 					return RedirectToAction(nameof(Index));
 			}
-			return View(Model);
+			if(!ValidRslt.IsValid)
+                ValidRslt.AddToModelState(this.ModelState);
+            return View(Model);
 		}
 
 		// POST: UserController/Delete/5

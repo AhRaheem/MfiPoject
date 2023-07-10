@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.DtoValidators.User
 {
-    public class UserLogin : AbstractValidator<LoginViewModel>
+    public class UserLoginValidator : AbstractValidator<LoginViewModel>
     {
-        public UserLogin() 
+        public UserLoginValidator() 
         {
             RuleFor(x => x.UserName).NotNull().WithMessage("Name Required");
             RuleFor(x => x.Password).NotNull().WithMessage("Password Required");
