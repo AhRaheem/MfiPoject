@@ -59,7 +59,7 @@
                 @Html.DisplayFor(modelItem => item.TitleEn)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => Enum.GetName(typeof(PostState), item.PostState))
+                @Enum.GetName(typeof(PostState), item.PostState)
             </td>
             <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">@Infrastructure.Helpers.Translator.TranslateText("","Edit")</a> |
