@@ -47,6 +47,8 @@ namespace Web.Controllers
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
                 }
             }
+            if(!ValidRslt.IsValid)
+                ValidRslt.AddToModelState(this.ModelState);
             return View(model);
         }
 

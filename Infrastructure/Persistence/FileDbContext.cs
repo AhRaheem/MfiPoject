@@ -9,6 +9,7 @@ namespace Infrastructure.Persistence
         private readonly CurrentUserService _CurrentUserService;
         public FileDbContext(DbContextOptions<FileDbContext> options, CurrentUserService currentUserService) : base(options)
         {
+            _CurrentUserService = currentUserService;
         }
 
         public DbSet<Core.Entites.File> Files => Set<Core.Entites.File>();

@@ -10,7 +10,6 @@ namespace Infrastructure.Helpers
     public class CurrentUserService
     {
         private IHttpContextAccessor _httpContextAccessor;
-
         public CurrentUserService(IHttpContextAccessor httpContextAccessor)
         {
             _httpContextAccessor = httpContextAccessor;

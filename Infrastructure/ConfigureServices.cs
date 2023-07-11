@@ -87,6 +87,7 @@ namespace Infrastructure
 			services.AddScoped<IValidator<PostAffiliateLawUpdateDto>, AffiliateLawUpdateDtoValidator>();
 			services.AddScoped<IValidator<PostParagraphUpdateDto>, ParagraphUpdateDtoValidator>();
 			services.AddScoped<IValidator<UserCreateDto>, UserCreateDtoValidator>();
+			services.AddScoped<IValidator<LoginViewModel>, UserLoginValidator>();
 
             return services;
         }
