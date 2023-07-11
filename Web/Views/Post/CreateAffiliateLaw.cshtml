@@ -2,7 +2,7 @@
 @model Infrastructure.Dtos.Post.PostAffiliateLawCreateDto
 
 @{
-    Layout = Context.Request.Headers["X-Requested-With"] == "XMLHttpRequest" ? null : "_Layout";
+    Layout = null;
     ViewData["Title"] = "View";
     //var PostInfo = (PostDto)ViewBag.PostInfo;
     ViewData["ActiveItem"] = "post";
