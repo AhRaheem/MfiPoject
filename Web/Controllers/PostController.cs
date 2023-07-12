@@ -192,6 +192,25 @@ namespace Web.Controllers
             return View(Model);
         }
 
+        // Update: UpdateAffiliateLawController/Update
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> UpdateAffiliateLaw(PostAffiliateLawUpdateDto Model)
+        {
+            var ValidRslt = await _AffiliateLawUpdateDtoValidator.ValidateAsync(Model);
+            if (ValidRslt.IsValid)
+            {
+                var Rslt = await _postService.UpdatePostAffiliateLaw(Model);
+                if (Rslt)
+                    return RedirectToAction(nameof(UpdateAffiliateLaw), new { UpdateId = Model.PostId });
+            }
+            var Update = await _postService.GetByIdWithAffiliateLaws(Model.PostId);
+            ViewData["UpdateInfo"] = Update;
+            if(!ValidRslt.IsValid)
+                ValidRslt.AddToModelState(this.ModelState);
+            return View(Model);
+        }
+
         // POST: PostController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]

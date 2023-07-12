@@ -12,7 +12,7 @@
 <h4>@Infrastructure.Helpers.Translator.TranslateText("","Post")</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-12">
         <form asp-action="Edit" enctype="multipart/form-data" class="row">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group mb-3 col-sm-6 col-md-5 col-xxl-4">
@@ -53,6 +53,7 @@
 </div>
 
 <div class="row">
+    <h3>Paragraphs</h3>
     @foreach (var Paragraph in Model.Paragraphs)
     {
         <div class="col-12">
@@ -74,10 +75,33 @@
             await Html.RenderPartialAsync("CreateParagraph", new PostParagraphCreateDto() { PostId = Model.Id});
         }
     </div>
+
+    <hr/>
 </div>
 
-<div>
-    <a asp-action="Index">@Infrastructure.Helpers.Translator.TranslateText("","Back to List")</a>
+<div class="row">
+    <h3>Paragraphs</h3>
+    @foreach (var law in Model.AffiliateLaws)
+    {
+        <div class="col-12">
+            @{
+                await Html.RenderPartialAsync("UpdateAffiliateLaw", new PostAffiliateLawUpdateDto() { 
+                    PostId = Model.Id,
+                    FileId = law.FileId,
+                    NameAr = law.NameAr,
+                    NameEn = law.NameEn
+                });
+            }
+        </div>
+    }
+
+    <div class="col-12">
+        @{
+            await Html.RenderPartialAsync("CreateAffiliateLaw", new PostAffiliateLawCreateDto() { PostId = Model.Id});
+        }
+    </div>
+
+    <hr/>
 </div>
 
 @section Scripts {

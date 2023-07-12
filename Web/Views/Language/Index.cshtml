@@ -3,7 +3,7 @@
 @{
     Layout = Context.Request.Headers["X-Requested-With"] == "XMLHttpRequest" ? null : "_Layout";
     ViewData["Title"] = "Index";
-    ViewData["ActiveItem"] = "partner";
+    ViewData["ActiveItem"] = "language";
 }
 
 <h1>@Infrastructure.Helpers.Translator.TranslateText("","Index")</h1>
@@ -11,7 +11,7 @@
 
 <div class="row">
     <form asp-action="SaveLanguageWords">
-        <table>
+        <table class="table">
             <thead>
                 <tr>
                     <td>@Infrastructure.Helpers.Translator.TranslateText("","Word")</td>
@@ -31,7 +31,7 @@
                     </tr>
                 }
 
-                @if (Infrastructure.Helpers.Translator.MissedTranslateWords.Count > 0)
+                @if (Infrastructure.Helpers.Translator.MissedTranslateWords.Count > 1)
                 {
                     @foreach (var Wrd in Infrastructure.Helpers.Translator.MissedTranslateWords[(Context.GetRouteData().Values["Id"]?.ToString())])
                     {
