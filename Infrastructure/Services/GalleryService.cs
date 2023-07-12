@@ -44,7 +44,7 @@ namespace Infrastructure.Services
 
 		public async Task<PaginatedList<GalleryDto>> GetAllWithItems(string? q, int page = 0, int size = 10)
 		{
-			var Qry = _unitOfWork.Gallery.GetAllQuery(predicate: x => !x.IsDeleted, page: page, size: size, include : x=>x.Include(g=>g.Items));
+			var Qry = _unitOfWork.Gallery.GetAllQuery(predicate: x => !x.IsDeleted, page: page, size: size, include : x=>x.Include(g=>g.Items.Where(i=>!i.IsDeleted)));
 			if (!string.IsNullOrWhiteSpace(q))
 				Qry = Qry.Where(x => x.TitleAr.Contains(q) || x.TitleEn.Contains(q));
 			return await Qry.ProjectTo<GalleryDto>(_mapper.ConfigurationProvider)

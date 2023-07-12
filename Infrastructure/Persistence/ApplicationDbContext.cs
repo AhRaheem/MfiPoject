@@ -25,10 +25,29 @@ namespace Infrastructure.Persistence
         public DbSet<RelatedWebsite> RelatedWebsites => Set<RelatedWebsite>();
 
 
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             base.OnModelCreating(modelBuilder);
+            var setQueryFilterMethod = new Action<ModelBuilder>(SetQueryFilter<BaseEntity>)
+                    .Method.GetGenericMethodDefinition();
+                foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+                {
+                    if (entityType.BaseType == null && typeof(BaseEntity).IsAssignableFrom(entityType.ClrType))
+                    {
+                        setQueryFilterMethod
+                            .MakeGenericMethod(entityType.ClrType)
+                            .Invoke(this, new object[] { modelBuilder });
+                    }
+                }
+        }
+
+        void SetQueryFilter<TEntity>(ModelBuilder modelBuilder)
+            where TEntity : BaseEntity
+        {
+            modelBuilder.Entity<TEntity>().HasQueryFilter(e => !e.IsDeleted);
         }
 
 

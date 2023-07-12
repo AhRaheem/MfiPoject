@@ -33,7 +33,7 @@ namespace Web.Controllers
 		// GET: GalleryController
 		public async Task<ActionResult> Index(string? q,int page=1, int size=10)
 		{
-			return View(await _galleryService.GetAll(q,page,size));
+			return View(await _galleryService.GetAllWithItems(q,page,size));
 		}
 
 		// GET: GalleryController/Create

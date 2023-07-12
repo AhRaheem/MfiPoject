@@ -2,13 +2,13 @@
 @model Infrastructure.Dtos.Gallery.GalleryItemCreateDto
 
 @{
-    Layout = Context.Request.Headers["X-Requested-With"] == "XMLHttpRequest" ? null : "_Layout";
+    Layout = null;
     ViewData["Title"] = "View";
     ViewData["ActiveItem"] = "gallery";
-    var GalleryInfo = (GalleryDto)ViewBag.GalleryInfo;
+    @* var GalleryInfo = (GalleryDto)ViewBag.GalleryInfo; *@
 }
 
-<div class="row">
+@* <div class="row">
     <div class="col-12">
         <img src="/File/GetImage/@GalleryInfo.MainFileId?Width=200&Height=150" class="img-fluid" />
     </div>
@@ -23,7 +23,7 @@
 <h4>@Infrastructure.Helpers.Translator.TranslateText("","Gallery Item")</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4"> *@
         <form asp-action="CreateItem" enctype="multipart/form-data" class="row">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group mb-3 col-sm-6 col-md-5 col-xxl-4">
@@ -31,12 +31,12 @@
                 <input asp-for="File" class="form-control" />
                 <span asp-validation-for="File" class="text-danger"></span>
             </div>
-            <input type="hidden" asp-for="GalleryId" value="@GalleryInfo.Id" />
+            <input type="hidden" asp-for="GalleryId"/>
             <div class="form-group mb-3 col-sm-6 col-md-5 col-xxl-4">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
-    </div>
+    @* </div>
 </div>
 
 <div class="row">
@@ -54,7 +54,7 @@
 
 <div>
     <a asp-action="Index">@Infrastructure.Helpers.Translator.TranslateText("","Back to List")</a>
-</div>
+</div> *@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

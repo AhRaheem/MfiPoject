@@ -1,6 +1,5 @@
-﻿
-
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
+using System.Collections.Generic;
 
 namespace Web.Controllers
 {
@@ -12,19 +11,19 @@ namespace Web.Controllers
             HostingEnvironment= environment;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string Id)
         {
-            return View();
+            var LangWords = System.IO.File.ReadAllLines(Path.Combine(HostingEnvironment.WebRootPath, $"Languages/{Id}.txt"));
+            return View(LangWords.ToList());
         }
 
-        public string MissedWords()
+        public ActionResult SaveLanguageWords(string Id, Dictionary<string,string> TranslateWords)
         {
-            string wordLst = "";
-            foreach (var item in Infrastructure.Helpers.Translator.MissedTranslateWords)
-            {
-                wordLst += $"{item}:";
-            }
-            return wordLst;
+            using (StreamWriter file = new StreamWriter(Path.Combine(HostingEnvironment.WebRootPath, $"Languages/{Id}.txt")))
+                foreach (var Wrd in TranslateWords)
+                    file.WriteLine($"{Wrd.Key}:{Wrd.Value}");
+            ReloadLanguageFiles();
+            return RedirectToAction(nameof(Index), new { Id = Id });
         }
 
         public ActionResult ReloadLanguageFiles()
@@ -58,7 +57,6 @@ namespace Web.Controllers
 
 
 		}
-
 
 		public void RemoveCookie(string key)
 		{

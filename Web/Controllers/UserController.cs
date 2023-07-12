@@ -11,7 +11,7 @@ namespace Web.Controllers
 	{
 		public readonly IUserService _userService;
         private IValidator<UserCreateDto> _CreateValidator;
-        private IValidator<UserUpdateDto> _UpdateValidator;
+        //private IValidator<UserUpdateDto> _UpdateValidator;
 
         public UserController(IUserService userService, 
 			IValidator<UserCreateDto> CreateValidator,
@@ -20,7 +20,7 @@ namespace Web.Controllers
 		{
 			_userService = userService;
             _CreateValidator = CreateValidator;
-			_UpdateValidator = UpdateValidator;
+			//_UpdateValidator = UpdateValidator;
         }
 
 		// GET: UserController
@@ -65,15 +65,15 @@ namespace Web.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<ActionResult> Edit(UserUpdateDto Model)
 		{
-            var ValidRslt = await _UpdateValidator.ValidateAsync(Model);
-            if (ValidRslt.IsValid)
-			{
+            //var ValidRslt = await _UpdateValidator.ValidateAsync(Model);
+            //if (ValidRslt.IsValid)
+			//{
 				var Rslt = await _userService.Update(Model);
 				if (Rslt)
 					return RedirectToAction(nameof(Index));
-			}
-			if(!ValidRslt.IsValid)
-                ValidRslt.AddToModelState(this.ModelState);
+			//}
+			//if(!ValidRslt.IsValid)
+   //             ValidRslt.AddToModelState(this.ModelState);
             return View(Model);
 		}
 

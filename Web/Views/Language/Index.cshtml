@@ -1,0 +1,54 @@
+﻿@model List<string>
+
+@{
+    Layout = Context.Request.Headers["X-Requested-With"] == "XMLHttpRequest" ? null : "_Layout";
+    ViewData["Title"] = "Index";
+    ViewData["ActiveItem"] = "partner";
+}
+
+<h1>@Infrastructure.Helpers.Translator.TranslateText("","Index")</h1>
+<hr>
+
+<div class="row">
+    <form asp-action="SaveLanguageWords">
+        <table>
+            <thead>
+                <tr>
+                    <td>@Infrastructure.Helpers.Translator.TranslateText("","Word")</td>
+                    <td>@Infrastructure.Helpers.Translator.TranslateText("","Translate")</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var Wrd in Model)
+                {
+                    <tr>
+                        <td>
+                            @Wrd.Split(':')[0]
+                        </td>
+                        <td>
+                            <input name="TranslateWords[@Wrd.Split(':')[0]]" value="@Wrd.Split(':')[1]" type="text" />
+                        </td>
+                    </tr>
+                }
+
+                @if (Infrastructure.Helpers.Translator.MissedTranslateWords.Count > 0)
+                {
+                    @foreach (var Wrd in Infrastructure.Helpers.Translator.MissedTranslateWords[(Context.GetRouteData().Values["Id"]?.ToString())])
+                    {
+                        <tr>
+                            <td>
+                                @Wrd.Key
+                            </td>
+                            <td>
+                                <input name="TranslateWords[@Wrd.Key]" value="@Wrd.Value" type="text" />
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </form>
+</div>

@@ -76,10 +76,10 @@
     <tfoot>
         <tr>
             <td>@Model.Items.Count / @Model.TotalCount</td>
-            <td>
+            <td colspan="100%">
                 @for (int i = 1; i == Model.TotalPages; i++)
                 {
-                    <a class="btn btn-link ps-2 pe-2" asp-action="index" asp-route-q="@Context.Request.Query["q"]" asp-route-page="@i" asp-route-size="10">@i</a>
+                    <a class="btn btn-danger ps-2 pe-2" asp-action="index" asp-route-q="@Context.Request.Query["q"]" asp-route-page="@i" asp-route-size="10">@i</a>
                 }
             </td>
         </tr>

@@ -45,7 +45,7 @@ namespace Infrastructure.Services
 
 		public async Task<PostDto> GetById(string Id)
 		{
-			var Entity = await _unitOfWork.Post.GetById(Id);
+			var Entity = await _unitOfWork.Post.GetById(Id, enableTracking: false);
 			return _mapper.Map<PostDto>(Entity);
 		}
 
@@ -213,6 +213,8 @@ namespace Infrastructure.Services
         {
             var Post = await GetById(Id);
             Post.PostState = PostState.Published;
+            var Entity = _mapper.Map<Post>(Post);
+            await _unitOfWork.Post.Update(Entity);
             return (await _unitOfWork.Save()) > 0;
         }
 
@@ -221,6 +223,8 @@ namespace Infrastructure.Services
             var Post = await GetById(postRejectDto.Id);
             Post.PostState = PostState.Reject;
             Post.RejectReason = postRejectDto.Reason;
+            var Entity = _mapper.Map<Post>(Post);
+            await _unitOfWork.Post.Update(Entity);
             return (await _unitOfWork.Save()) > 0;
         }
     }

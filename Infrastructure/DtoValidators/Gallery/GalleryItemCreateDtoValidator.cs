@@ -23,7 +23,7 @@ namespace Infrastructure.DtoValidators.Gallery
         public async Task<bool> GalleryExits(string GalleryId, CancellationToken arg2) 
         {
             var Glry = await _GalleryService.GetById(GalleryId);
-            return Glry is null;
+            return Glry != null;
         }
 
         public bool ValidImageOrVideoFile(IFormFile File) 

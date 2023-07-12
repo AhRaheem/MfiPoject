@@ -211,7 +211,7 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Publish(string Id) 
         {
-            await _postService.Publish(Id);
+            var Rslt = await _postService.Publish(Id);
             return RedirectToAction(nameof(Edit), new { Id = Id });
         }
 

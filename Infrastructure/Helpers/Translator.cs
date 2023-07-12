@@ -23,7 +23,7 @@ namespace Infrastructure.Helpers
 
         public static Dictionary<string, Dictionary<string, string>>? LanguagesWords;
 
-        public static List<string> MissedTranslateWords = new List<string>();
+        public static Dictionary<string, Dictionary<string, string>> MissedTranslateWords = new Dictionary<string, Dictionary<string, string>>();
 
         public static void LoadLanguageFiles(string BasePath)
         {
@@ -54,8 +54,10 @@ namespace Infrastructure.Helpers
             try { return LanguagesWords![Language][Text]; }
             catch (Exception e)
             {
-                if (!MissedTranslateWords.Contains(Text))
-                    MissedTranslateWords.Add(Text);
+                if (!MissedTranslateWords.ContainsKey(Language))
+                    MissedTranslateWords.Add(Language, new Dictionary<string, string>());
+                if (!MissedTranslateWords[Language].ContainsKey(Text))
+                    MissedTranslateWords[Language].Add(Text, "");
                 return Text;
             }
         }

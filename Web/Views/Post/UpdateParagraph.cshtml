@@ -1,7 +1,7 @@
 ﻿@model Infrastructure.Dtos.Post.PostParagraphUpdateDto
 
 @{
-    Layout = Context.Request.Headers["X-Requested-With"] == "XMLHttpRequest" ? null : "_Layout";
+    Layout = null;
     ViewData["Title"] = "View";
     //var PostInfo = (PostDto)ViewBag.PostInfo;
     ViewData["ActiveItem"] = "post";
