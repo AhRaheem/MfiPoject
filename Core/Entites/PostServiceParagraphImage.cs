@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace Core.Entites
 {
-    public class PostServiceParagraphImage
+    public class PostServiceParagraphImage : BaseEntity
     {
         public string? FileId { get; set; }
+        public string? PostServiceParagraphId { get; set; }
+        [ForeignKey("PostServiceParagraphId")]
+        public virtual PostServiceParagraph? PostServiceParagraph { get; set; }
     }
 }
