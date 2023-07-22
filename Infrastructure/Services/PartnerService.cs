@@ -58,7 +58,7 @@ namespace Infrastructure.Services
 
         public async Task<PartnerUpdateDto> GetUpdateInfo(string Id)
         {
-            return _mapper.Map<PartnerUpdateDto>(await _unitOfWork.Post.GetById(Id));
+            return _mapper.Map<PartnerUpdateDto>(await _unitOfWork.Partner.GetById(Id));
         }
 
         public async Task<PartnerDto> GetByArName(string Name)

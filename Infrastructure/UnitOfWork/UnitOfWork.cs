@@ -15,8 +15,8 @@ namespace Infrastructure.UnitOfWork
         private IPartnerRepository _Partner;
         public IPartnerRepository Partner { get { return _Partner ?? (new PartnerRepository(Context)); } }
 
-        private IPostRepository _Post;
-        public IPostRepository Post { get { return _Post ?? (new PostRepository(Context)); } }
+        //private IPostRepository _Post;
+        //public IPostRepository Post { get { return _Post ?? (new PostRepository(Context)); } }
 
         private IProfileInfoRepository _ProfileInfo;
         public IProfileInfoRepository ProfileInfo { get { return _ProfileInfo ?? (new ProfileInfoRepository(Context)); } }

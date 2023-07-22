@@ -2,7 +2,7 @@
 
 namespace Core.Entities.Base
 {
-    public class BaseEntity
+    public abstract class BaseEntity
     {
         [Key]
         public string? Id { get; set; } = Guid.NewGuid().ToString();

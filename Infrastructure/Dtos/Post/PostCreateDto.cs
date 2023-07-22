@@ -1,8 +1,6 @@
-﻿
-
-namespace Infrastructure.Dtos.Post
+﻿namespace Infrastructure.Dtos.Post
 {
-	public class PostCreateDto : IMapFrom<Core.Entites.Post>
+    public class PostCreateDto : IMapFrom<Core.Entites.Base.Post>
 	{
 		public string Id { get; set; }
 		[TranslateDisplay("Type")]

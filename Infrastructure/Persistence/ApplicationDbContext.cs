@@ -18,13 +18,33 @@ namespace Infrastructure.Persistence
         public DbSet<GalleryItem> GalleryItems => Set<GalleryItem>();
         public DbSet<Partner> Partners => Set<Partner>();
         public DbSet<PartnerCategory> PartnerCategories => Set<PartnerCategory>();
-        public DbSet<Post> Posts => Set<Post>();
-        public DbSet<PostParagraph> PostParagraphs => Set<PostParagraph>();
+        //public DbSet<Post> Posts => Set<Post>();
+        //public DbSet<PostArticlePostParagraph> PostParagraphs => Set<PostArticlePostParagraph>();
         public DbSet<PostAffiliateLaw> PostAffiliateLaws => Set<PostAffiliateLaw>();
         public DbSet<ProfileInfo> ProfileInfos => Set<ProfileInfo>();
         public DbSet<RelatedWebsite> RelatedWebsites => Set<RelatedWebsite>();
 
+        public DbSet<Achievement> Achievements => Set<Achievement>();
 
+        public DbSet<News> News => Set<News>();
+
+        public DbSet<Service> Services => Set<Service>();
+
+        public DbSet<NewsRelatedGallery> NewsRelatedGalleries => Set<NewsRelatedGallery>();
+
+        public DbSet<NewsRelatedNews> NewsRelatedNews => Set<NewsRelatedNews>();
+
+        public DbSet<PostArticleParagraph> PostArticleParagraphs => Set<PostArticleParagraph>();
+
+        public DbSet<PostServiceParagraph> PostServiceParagraphs => Set<PostServiceParagraph>();
+
+        public DbSet<PostServiceParagraphImage> PostServiceParagraphImages => Set<PostServiceParagraphImage>();
+
+        public DbSet<AboutUs> AboutUs => Set<AboutUs>();
+
+        public DbSet<Directors> Directors => Set<Directors>();
+
+        public DbSet<DirectorsCategory> DirectorsCategories => Set<DirectorsCategory>();
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

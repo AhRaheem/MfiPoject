@@ -53,7 +53,7 @@ namespace Infrastructure
             services.AddScoped<IGalleryRepository, GalleryRepository>();
 			services.AddScoped<IPartnerRepository, PartnerRepository>();
 			services.AddScoped<IPartnerCategoryRepository, PartnerCategoryRepository>();
-			services.AddScoped<IPostRepository, PostRepository>();
+			//services.AddScoped<IPostRepository, PostRepository>();
 			services.AddScoped<IProfileInfoRepository, ProfileInfoRepository>();
 			services.AddScoped<IRelatedWebsiteRepository, RelatedWebsiteRepository>();
 
@@ -62,7 +62,7 @@ namespace Infrastructure
 			services.AddScoped<IGalleryService, GalleryService>();
 			services.AddScoped<IPartnerCategoryService, PartnerCategoryService>();
 			services.AddScoped<IPartnerService, PartnerService>();
-			services.AddScoped<IPostService, PostService>();
+			//services.AddScoped<IPostService, PostService>();
 			services.AddScoped<IProfileInfoService, ProfileInfoService>();
 			services.AddScoped<IRelatedWebsiteService, RelatedWebsiteService>();
 			services.AddScoped<IUserService, UserService>();
@@ -80,12 +80,12 @@ namespace Infrastructure
 			services.AddScoped<IValidator<ProfileInfoUpdateDto>, ProfileInfoUpdateDtoValidator>();
 			services.AddScoped<IValidator<RelatedWebsiteCreateDto>, RelatedWebsiteCreateDtoValidator>();
 			services.AddScoped<IValidator<RelatedWebsiteUpdateDto>, RelatedWebsiteUpdateDtoValidator>();
-			services.AddScoped<IValidator<PostCreateDto>, PostCreateDtoValidator>();
-			services.AddScoped<IValidator<PostParagraphCreateDto>, ParagraphCreateDtoValidator>();
-			services.AddScoped<IValidator<PostAffiliateLawCreateDto>, AffiliateLawCreateDtoValidator>();
-			services.AddScoped<IValidator<PostUpdateDto>, PostUpdateDtoValidator>();
-			services.AddScoped<IValidator<PostAffiliateLawUpdateDto>, AffiliateLawUpdateDtoValidator>();
-			services.AddScoped<IValidator<PostParagraphUpdateDto>, ParagraphUpdateDtoValidator>();
+			//services.AddScoped<IValidator<PostCreateDto>, PostCreateDtoValidator>();
+			//services.AddScoped<IValidator<PostParagraphCreateDto>, ParagraphCreateDtoValidator>();
+			//services.AddScoped<IValidator<PostAffiliateLawCreateDto>, AffiliateLawCreateDtoValidator>();
+			//services.AddScoped<IValidator<PostUpdateDto>, PostUpdateDtoValidator>();
+			//services.AddScoped<IValidator<PostAffiliateLawUpdateDto>, AffiliateLawUpdateDtoValidator>();
+			//services.AddScoped<IValidator<PostParagraphUpdateDto>, ParagraphUpdateDtoValidator>();
 			services.AddScoped<IValidator<UserCreateDto>, UserCreateDtoValidator>();
 			services.AddScoped<IValidator<LoginViewModel>, UserLoginValidator>();
 

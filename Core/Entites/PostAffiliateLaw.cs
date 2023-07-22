@@ -1,8 +1,10 @@
 ﻿
 
+using Core.Entites.Base;
+
 namespace Core.Entites
 {
-	public class PostAffiliateLaw : BaseEntity
+    public class PostAffiliateLaw : BaseEntity
 	{
 		public string? NameAr { get; set; }
 		public string? NameEn { get; set; }
