@@ -11,6 +11,7 @@ namespace Core.Contracts.UnitOfWork
         //IPostRepository Post { get; }
         IProfileInfoRepository ProfileInfo { get; }
         IRelatedWebsiteRepository RelatedWebsite { get; }
+        IAboutusRepository AboutUs { get; }
         Task<int> Save(CancellationToken cancellationToken = default);
     }
 }

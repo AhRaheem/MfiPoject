@@ -27,6 +27,9 @@ namespace Infrastructure.UnitOfWork
         private IFileRepository _File;
         public IFileRepository File { get { return _File ?? (new FileRepository(FileContext)); } }
 
+        private IAboutusRepository _AboutUs;
+        public IAboutusRepository AboutUs { get { return _AboutUs ?? (new AboutUsRepository(Context)); } }
+
         public UnitOfWork(IApplicationDbContext dbContext, IFileDbContext FileDbContext)
 		{
 			Context = dbContext;

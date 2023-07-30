@@ -160,7 +160,7 @@
 										@if (User.IsInRole("Admin"))
 										{
 											<li class="nav-item">
-												<a class="nav-link @(ViewBag.ActiveItem == "aboutus"?"active":"")" asp-controller="RelatedWebsite" asp-action="Index">
+												<a class="nav-link @(ViewBag.ActiveItem == "aboutus"?"active":"")" asp-controller="AboutUs" asp-action="Edit">
 													<div class="icon trophy-secondary"></div>
 													<span>@Infrastructure.Helpers.Translator.TranslateText("","About Us")</span>
 												</a>

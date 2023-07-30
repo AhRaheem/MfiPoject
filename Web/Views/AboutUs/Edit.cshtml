@@ -1,0 +1,90 @@
+﻿@*@model Infrastructure.Dtos.AboutUs.AboutUpdateDto*@
+@model Infrastructure.Dtos.AboutUs.AboutUsUpdateDto
+
+@{
+    Layout = Context.Request.Headers["X-Requested-With"] == "XMLHttpRequest" ? null : "_Layout";
+    ViewData["Title"] = "Edit";
+    ViewData["ActiveItem"] = "partner";
+}
+
+<h1>@Infrastructure.Helpers.Translator.TranslateText("","Edit")</h1><hr>
+
+<h4>@Infrastructure.Helpers.Translator.TranslateText("","Partner")</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data" class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group mb-3 col-sm-6 col-md-5 col-xxl-4">
+                <label asp-for="TitleAr" class="control-label"></label>
+                <input asp-for="TitleAr" class="form-control" />
+                <span asp-validation-for="TitleAr" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3 col-sm-6 col-md-5 col-xxl-4">
+                <label asp-for="TitleEn" class="control-label"></label>
+                <input asp-for="TitleEn" class="form-control" />
+                <span asp-validation-for="TitleEn" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3 col-sm-6 col-md-5 col-xxl-4">
+                <label asp-for="IntroAr" class="control-label"></label>
+                <input asp-for="IntroAr" class="form-control" />
+                <span asp-validation-for="IntroAr" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3 col-sm-6 col-md-5 col-xxl-4">
+                <label asp-for="IntroEn" class="control-label"></label>
+                <input asp-for="IntroEn" class="form-control" />
+                <span asp-validation-for="IntroEn" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3 col-sm-6 col-md-5 col-xxl-4">
+                <label asp-for="BeneficiariesWordEn" class="control-label"></label>
+                <input asp-for="BeneficiariesWordEn" class="form-control" />
+                <span asp-validation-for="BeneficiariesWordEn" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3 col-sm-6 col-md-5 col-xxl-4">
+                <label asp-for="VisionWordAr" class="control-label"></label>
+                <input asp-for="VisionWordAr" class="form-control" />
+                <span asp-validation-for="VisionWordAr" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3 col-sm-6 col-md-5 col-xxl-4">
+                <label asp-for="VisionWordEn" class="control-label"></label>
+                <input asp-for="VisionWordEn" class="form-control" />
+                <span asp-validation-for="VisionWordEn" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3 col-sm-6 col-md-5 col-xxl-4">
+                <label asp-for="VisionImageId" class="control-label"></label>
+                <input asp-for="VisionImageId" class="form-control" />
+                <span asp-validation-for="VisionImageId" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3 col-sm-6 col-md-5 col-xxl-4">
+                <label asp-for="MissionWordAr" class="control-label"></label>
+                <input asp-for="MissionWordAr" class="form-control" />
+                <span asp-validation-for="MissionWordAr" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3 col-sm-6 col-md-5 col-xxl-4">
+                <label asp-for="MissionWordEn" class="control-label"></label>
+                <input asp-for="MissionWordEn" class="form-control" />
+                <span asp-validation-for="MissionWordEn" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3 col-sm-6 col-md-5 col-xxl-4">
+                <label asp-for="MissionImageId" class="control-label"></label>
+                <input asp-for="MissionImageId" class="form-control" />
+                <span asp-validation-for="MissionImageId" class="text-danger"></span>
+            </div>
+
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group mb-3 col-sm-6 col-md-5 col-xxl-4">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">@Infrastructure.Helpers.Translator.TranslateText("","Back to List")</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

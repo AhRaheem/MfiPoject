@@ -12,7 +12,10 @@ namespace Infrastructure.Persistence
 	{
 		public static async Task InitializeAsync(IServiceProvider service)
 		{
-			var roleManager = service.GetRequiredService<RoleManager<IdentityRole>>();
+            var DbContext = service.GetRequiredService<ApplicationDbContext>();
+            await AddAboutUs(DbContext);
+
+            var roleManager = service.GetRequiredService<RoleManager<IdentityRole>>();
 			await AddRolesToDatabase(roleManager);
 
 			var context = service.GetRequiredService<UserManager<ApplicationUser>>();
@@ -52,5 +55,11 @@ namespace Infrastructure.Persistence
 					await roleManager.CreateAsync(new IdentityRole(role));
 			}
 		}
-	}
+
+        protected static async Task AddAboutUs(ApplicationDbContext DbContext)
+        {
+			DbContext.AboutUs.Add(new AboutUs() { TitleAr = "من نحن", TitleEn="AboutUs"});
+			await DbContext.SaveChangesAsync();
+        }
+    }
 }
