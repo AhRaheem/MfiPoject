@@ -1,7 +1,7 @@
 ﻿
 
 using FluentValidation;
-using Infrastructure.Dtos.NewsRelatedGalleries;
+using Infrastructure.Dtos.NewsRelatedGallery;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Web.Controllers
@@ -9,13 +9,13 @@ namespace Web.Controllers
 	[Authorize(Roles = "Admin")]
 	public class NewsRelatedGalleriesController : Controller
 	{
-		public readonly INewsRelatedGalleriesService _NewsRelatedGalleriesService;
+		public readonly INewsRelatedGalleryService _NewsRelatedGalleryService;
 		public readonly INewsRelatedGalleriesCategoryService _NewsRelatedGalleriesCategoryService;
         private IValidator<NewsRelatedGalleriesCreateDto> _CreateValidator;
         private IValidator<NewsRelatedGalleriesUpdateDto> _UpdateValidator;
-        public NewsRelatedGalleriesController(INewsRelatedGalleriesService NewsRelatedGalleriesService, INewsRelatedGalleriesCategoryService NewsRelatedGalleriesCategoryService, IValidator<NewsRelatedGalleriesCreateDto> CreateValidator, IValidator<NewsRelatedGalleriesUpdateDto> UpdateValidator)
+        public NewsRelatedGalleriesController(INewsRelatedGalleryService NewsRelatedGalleryService, INewsRelatedGalleriesCategoryService NewsRelatedGalleriesCategoryService, IValidator<NewsRelatedGalleriesCreateDto> CreateValidator, IValidator<NewsRelatedGalleriesUpdateDto> UpdateValidator)
 		{
-			_NewsRelatedGalleriesService = NewsRelatedGalleriesService;
+			_NewsRelatedGalleryService = NewsRelatedGalleryService;
 			_NewsRelatedGalleriesCategoryService = NewsRelatedGalleriesCategoryService;
             _CreateValidator = CreateValidator;
             _UpdateValidator = UpdateValidator;
@@ -24,7 +24,7 @@ namespace Web.Controllers
 		// GET: NewsRelatedGalleriesController
 		public async Task<ActionResult> Index(string? q,int page=1, int size=10)
 		{
-			return View(await _NewsRelatedGalleriesService.GetAll(q,page,size));
+			return View(await _NewsRelatedGalleryService.GetAll(q,page,size));
 		}
 
 		// GET: NewsRelatedGalleriesController/Create
@@ -37,13 +37,13 @@ namespace Web.Controllers
 		// POST: NewsRelatedGalleriesController/Create
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<ActionResult> Create(NewsRelatedGalleriesCreateDto Model)
+		public async Task<ActionResult> Create(NewsRelatedGalleryCreateDto Model)
 		{
 			var ValidRslt = await _CreateValidator.ValidateAsync(Model);
             ValidRslt.AddToModelState(this.ModelState);
             if (ValidRslt.IsValid) 
 			{
-				var Rslt = await _NewsRelatedGalleriesService.Create(Model);
+				var Rslt = await _NewsRelatedGalleryService.Create(Model);
 				if (Rslt)
 					return RedirectToAction(nameof(Index));
 			}
@@ -57,19 +57,19 @@ namespace Web.Controllers
 		public async Task<ActionResult> Edit(string id)
 		{
             ViewData["NewsRelatedGalleriesCategoryId"] = new SelectList(await _NewsRelatedGalleriesCategoryService.GetList(), "Id", "NameAr");
-            var Entity = await _NewsRelatedGalleriesService.GetUpdateInfo(id);
+            var Entity = await _NewsRelatedGalleryService.GetUpdateInfo(id);
 			return View(Entity);
 		}
 
 		// POST: NewsRelatedGalleriesController/Edit/5
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<ActionResult> Edit(NewsRelatedGalleriesUpdateDto Model)
+		public async Task<ActionResult> Edit(NewsRelatedGalleryUpdateDto Model)
 		{
             var ValidRslt = await _UpdateValidator.ValidateAsync(Model);
             if (ValidRslt.IsValid)
 			{
-				var Rslt = await _NewsRelatedGalleriesService.Update(Model);
+				var Rslt = await _NewsRelatedGalleryService.Update(Model);
 				if (Rslt)
 					return RedirectToAction(nameof(Index));
 			}
@@ -84,7 +84,7 @@ namespace Web.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<ActionResult> Delete(string id)
 		{
-			var Rslt = await _NewsRelatedGalleriesService.Delete(id);
+			var Rslt = await _NewsRelatedGalleryService.Delete(id);
 			return RedirectToAction(nameof(Index));
 		}
 	}

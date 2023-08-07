@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Contracts.Repositories
 {
-    interface IPostArticleParagraphRepository : IGenericRepository<IApplicationDbContext, PostArticleParagraph>
+    public interface IPostArticleParagraphRepository : IGenericRepository<IApplicationDbContext, PostArticleParagraph>
     {
     }
 }

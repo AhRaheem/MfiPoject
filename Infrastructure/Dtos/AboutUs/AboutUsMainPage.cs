@@ -8,6 +8,7 @@ namespace Infrastructure.Dtos.AboutUs
 {
     public class AboutUsMainPage
     {
+        [TranslateDisplay]
         public string? AboutUsMainPageDesc { get; set; }
     }
 }

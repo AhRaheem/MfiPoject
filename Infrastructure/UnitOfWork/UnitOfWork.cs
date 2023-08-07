@@ -1,4 +1,6 @@
 ﻿
+using Core.Contracts.Repositories;
+
 namespace Infrastructure.UnitOfWork
 {
     public class UnitOfWork : IDisposable, IUnitOfWork
@@ -29,6 +31,36 @@ namespace Infrastructure.UnitOfWork
 
         private IAboutusRepository _AboutUs;
         public IAboutusRepository AboutUs { get { return _AboutUs ?? (new AboutUsRepository(Context)); } }
+
+        private IAchievementRepository _Achievement;
+        public IAchievementRepository Achievement { get { return _Achievement ?? (new AchievementRepository(Context)); } }
+
+        private INewsRepository _News;
+        public INewsRepository News { get { return _News ?? (new NewsRepository(Context)); } }
+
+        private IServiceRepository _Service;
+        public IServiceRepository Service { get { return _Service ?? (new ServiceRepository(Context)); } }
+
+        private INewsRelatedGalleryRepository _NewsRelatedGallery;
+        public INewsRelatedGalleryRepository NewsRelatedGallery { get { return _NewsRelatedGallery ?? (new NewsRelatedGalleryRepository(Context)); } }
+
+        private INewsRelatedNewsRepository _NewsRelatedNews;
+        public INewsRelatedNewsRepository NewsRelatedNews { get { return _NewsRelatedNews ?? (new NewsRelatedNewsRepository(Context)); } }
+
+        private IPostArticleParagraphRepository _PostArticleParagraph;
+        public IPostArticleParagraphRepository PostArticleParagraph { get { return _PostArticleParagraph ?? (new PostArticleParagraphRepository(Context)); } }
+
+        private IPostServiceParagraphRepository _PostServiceParagraph;
+        public IPostServiceParagraphRepository PostServiceParagraph { get { return _PostServiceParagraph ?? (new PostServiceParagraphRepository(Context)); } }
+
+        private IPostServiceParagraphImageRepository _PostServiceParagraphImage;
+        public IPostServiceParagraphImageRepository PostServiceParagraphImage { get { return _PostServiceParagraphImage ?? (new PostServiceParagraphImageRepository(Context)); } }
+
+        private IDirectorsRepository _Director;
+        public IDirectorsRepository Directors { get { return _Director ?? (new DirectorRepository(Context)); } }
+
+        private IDirectorsCategoryRepository _DirectorsCategory;
+        public IDirectorsCategoryRepository DirectorsCategory { get { return _DirectorsCategory ?? (new DirectorsCategoryRepository(Context)); } }
 
         public UnitOfWork(IApplicationDbContext dbContext, IFileDbContext FileDbContext)
 		{

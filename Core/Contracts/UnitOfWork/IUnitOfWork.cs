@@ -9,6 +9,16 @@ namespace Core.Contracts.UnitOfWork
         IPartnerCategoryRepository PartnerCategory { get; }
         IPartnerRepository Partner { get; }
         //IPostRepository Post { get; }
+        IAchievementRepository Achievement { get; }
+        INewsRepository News { get; }
+        IServiceRepository Service { get; }
+        INewsRelatedGalleryRepository NewsRelatedGallery { get; }
+        INewsRelatedNewsRepository NewsRelatedNews { get; }
+        IPostArticleParagraphRepository PostArticleParagraph { get; }
+        IPostServiceParagraphRepository PostServiceParagraph { get; }
+        IPostServiceParagraphImageRepository PostServiceParagraphImage { get; }
+        IDirectorsRepository Directors { get; }
+        IDirectorsCategoryRepository DirectorsCategory { get; }
         IProfileInfoRepository ProfileInfo { get; }
         IRelatedWebsiteRepository RelatedWebsite { get; }
         IAboutusRepository AboutUs { get; }

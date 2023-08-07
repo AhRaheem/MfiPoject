@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Contracts.Repositories
 {
-    interface IServiceRepository : IGenericRepository<IApplicationDbContext, Service>
+    public interface IServiceRepository : IGenericRepository<IApplicationDbContext, Service>
     {
 
     }

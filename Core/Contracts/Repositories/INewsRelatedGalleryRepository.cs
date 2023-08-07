@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Contracts.Repositories
 {
-    interface INewsRelatedGalleryRepository : IGenericRepository<IApplicationDbContext, NewsRelatedGallery>
+    public interface INewsRelatedGalleryRepository : IGenericRepository<IApplicationDbContext, NewsRelatedGallery>
     {
     }
 }
