@@ -10,5 +10,7 @@ namespace Infrastructure.Dtos.DirectorsCategory
         public string? NameEn { get; set; }
         [TranslateDisplay]
         public string? FileId { get; set; }
+        [TranslateDisplay]
+        public IFormFile? File { get; set; }
     }
 }

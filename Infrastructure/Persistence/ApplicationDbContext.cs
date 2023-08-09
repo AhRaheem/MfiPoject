@@ -28,6 +28,8 @@ namespace Infrastructure.Persistence
 
         public DbSet<News> News => Set<News>();
 
+        public DbSet<Protocol> Protocols => Set<Protocol>();
+
         public DbSet<Service> Services => Set<Service>();
 
         public DbSet<NewsRelatedGallery> NewsRelatedGalleries => Set<NewsRelatedGallery>();

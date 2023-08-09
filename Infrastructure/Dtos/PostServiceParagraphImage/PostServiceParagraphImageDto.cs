@@ -1,5 +1,7 @@
 ﻿
 
+using Infrastructure.Dtos.PostServiceParagraph;
+
 namespace Infrastructure.Dtos.PostServiceParagraphImage
 {
 	public class PostServiceParagraphImageDto : IMapFrom<Core.Entites.PostServiceParagraphImage>

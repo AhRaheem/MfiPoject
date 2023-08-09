@@ -23,5 +23,7 @@ namespace Infrastructure.Dtos.Service
 
         public string? IntroAr { get; set; }
         public string? IntroEn { get; set; }
+        [TranslateDisplay]
+        public IFormFile? File { get; set; }
     }
 }

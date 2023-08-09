@@ -33,5 +33,7 @@ namespace Infrastructure.Dtos.Achievement
         public DateTime? BreakingTo { get; set; }
         [TranslateDisplay]
         public bool Titled { get; set; }
+        [TranslateDisplay]
+        public IFormFile? File { get; set; }
     }
 }

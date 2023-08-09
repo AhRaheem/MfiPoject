@@ -18,5 +18,8 @@ namespace Infrastructure.Dtos.PostArticleParagraph
         public string? PostId { get; set; }
         [TranslateDisplay]
         public string? FileId { get; set; }
+
+        [TranslateDisplay]
+        public IFormFile? File { get; set; }
     }
 }

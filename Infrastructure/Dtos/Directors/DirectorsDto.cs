@@ -1,5 +1,7 @@
 ﻿
 
+using Infrastructure.Dtos.DirectorsCategory;
+
 namespace Infrastructure.Dtos.Directors
 {
 	public class DirectorsDto : IMapFrom<Core.Entites.Directors>
@@ -20,6 +22,6 @@ namespace Infrastructure.Dtos.Directors
         public string? PositionNameEn { get; set; }
         [TranslateDisplay]
         public string? DirectorsCategoryId { get; set; }
-        public virtual DirectorsCategory? DirectorsCategory { get; set; }
+        public virtual DirectorsCategoryDto? DirectorsCategory { get; set; }
     }
 }

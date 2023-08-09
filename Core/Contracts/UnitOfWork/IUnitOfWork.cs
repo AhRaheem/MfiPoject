@@ -12,6 +12,7 @@ namespace Core.Contracts.UnitOfWork
         IAchievementRepository Achievement { get; }
         INewsRepository News { get; }
         IServiceRepository Service { get; }
+        IProtocolRepository Protocol { get; }
         INewsRelatedGalleryRepository NewsRelatedGallery { get; }
         INewsRelatedNewsRepository NewsRelatedNews { get; }
         IPostArticleParagraphRepository PostArticleParagraph { get; }

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Infrastructure.Dtos.NewsRelatedGallery;
+using Infrastructure.Dtos.NewsRelatedNews;
+using Infrastructure.Dtos.PostArticleParagraph;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,11 +30,11 @@ namespace Infrastructure.Dtos.News
         public DateTime? BreakingTo { get; set; }
         public bool Titled { get; set; }
 
-        public virtual ICollection<PostArticleParagraph>? PostArticleParagraphs { get; set; }
-        public virtual ICollection<PostAffiliateLaw>? AffiliateLaws { get; set; }
+        public virtual ICollection<PostArticleParagraphDto>? PostArticleParagraphs { get; set; }
+        public virtual ICollection<PostAffiliateLawDto>? AffiliateLaws { get; set; }
 
-        public virtual ICollection<NewsRelatedNews>? NewsRelatedNews { get; set; }
-        public virtual ICollection<NewsRelatedGallery>? NewsRelatedGalleries { get; set; }
+        public virtual ICollection<NewsRelatedNewsDto>? NewsRelatedNews { get; set; }
+        public virtual ICollection<NewsRelatedGalleryDto>? NewsRelatedGalleries { get; set; }
 
         public DateTime CreatedOn { get; set; }
     }
