@@ -1,5 +1,6 @@
 ﻿
 
+using Core.Contracts.Repositories;
 using Infrastructure.DtoValidators.AffiliateLaw;
 using Infrastructure.DtoValidators.Paragraph;
 using Infrastructure.DtoValidators.Partner;
@@ -9,6 +10,8 @@ using Infrastructure.DtoValidators.ProfileInfo;
 using Infrastructure.DtoValidators.RelatedWebsite;
 using Infrastructure.DtoValidators.User;
 using Infrastructure.Helpers;
+using Infrastructure.Repository;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting.Internal;
 using System;
 
@@ -51,18 +54,27 @@ namespace Infrastructure
 
 			// repos
             services.AddScoped<IGalleryRepository, GalleryRepository>();
+            services.AddScoped<IAboutusRepository, AboutUsRepository>();
 			services.AddScoped<IPartnerRepository, PartnerRepository>();
 			services.AddScoped<IPartnerCategoryRepository, PartnerCategoryRepository>();
 			//services.AddScoped<IPostRepository, PostRepository>();
+			services.AddScoped<INewsRepository, NewsRepository>();
+			services.AddScoped<IProtocolRepository, ProtocolRepository>();
+			services.AddScoped<IAchievementRepository, AchievementRepository>();
+			services.AddScoped<IServiceRepository, ServiceRepository>();
 			services.AddScoped<IProfileInfoRepository, ProfileInfoRepository>();
 			services.AddScoped<IRelatedWebsiteRepository, RelatedWebsiteRepository>();
 
 			// services
             services.AddScoped<IFileService, FileService>();
+            services.AddScoped<IAboutUsService, AboutUsService>();
 			services.AddScoped<IGalleryService, GalleryService>();
 			services.AddScoped<IPartnerCategoryService, PartnerCategoryService>();
 			services.AddScoped<IPartnerService, PartnerService>();
-			//services.AddScoped<IPostService, PostService>();
+			services.AddScoped<INewsService, NewsService>();
+			services.AddScoped<IAchievementService, AchievementService>();
+			services.AddScoped<IServiceService, ServiceService>();
+			services.AddScoped<IProtocolService, ProtocolService>();
 			services.AddScoped<IProfileInfoService, ProfileInfoService>();
 			services.AddScoped<IRelatedWebsiteService, RelatedWebsiteService>();
 			services.AddScoped<IUserService, UserService>();

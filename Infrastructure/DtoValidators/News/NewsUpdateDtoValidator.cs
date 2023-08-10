@@ -20,12 +20,12 @@ namespace Infrastructure.DtoValidators.News
             _NewsService = NewsService;
             RuleFor(x => x.Id).NotNull().WithMessage("Id Required");
 
-            RuleFor(x => x.NameAr).NotEmpty().WithMessage("Name Required").MustAsync(
+            RuleFor(x => x.TitleAr).NotEmpty().WithMessage("Name Required").MustAsync(
                 async (model, NameAr, cancellation) => {
                     return await NewsArNameExits(NameAr, model.Id, cancellation);
                 }).WithMessage("NameAr Is Exits");
 
-            RuleFor(x => x.NameEn).NotEmpty().WithMessage("Name Required").MustAsync(
+            RuleFor(x => x.TitleEn).NotEmpty().WithMessage("Name Required").MustAsync(
                 async (model, NameEn, cancellation) => {
                     return await NewsEnNameExits(NameEn, model.Id, cancellation);
                 }).WithMessage("NameAr Is Exits");

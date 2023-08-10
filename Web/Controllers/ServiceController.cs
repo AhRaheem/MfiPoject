@@ -10,13 +10,11 @@ namespace Web.Controllers
 	public class ServiceController : Controller
 	{
 		public readonly IServiceService _ServiceService;
-		public readonly IServiceCategoryService _ServiceCategoryService;
         private IValidator<ServiceCreateDto> _CreateValidator;
         private IValidator<ServiceUpdateDto> _UpdateValidator;
-        public ServiceController(IServiceService ServiceService, IServiceCategoryService ServiceCategoryService, IValidator<ServiceCreateDto> CreateValidator, IValidator<ServiceUpdateDto> UpdateValidator)
+        public ServiceController(IServiceService ServiceService, IValidator<ServiceCreateDto> CreateValidator, IValidator<ServiceUpdateDto> UpdateValidator)
 		{
 			_ServiceService = ServiceService;
-			_ServiceCategoryService = ServiceCategoryService;
             _CreateValidator = CreateValidator;
             _UpdateValidator = UpdateValidator;
         }
@@ -30,7 +28,6 @@ namespace Web.Controllers
 		// GET: ServiceController/Create
 		public async Task<ActionResult> Create()
 		{
-            ViewData["ServiceCategoryId"] = new SelectList(await _ServiceCategoryService.GetList(), "Id","NameAr");
 			return View();
 		}
 
@@ -47,7 +44,6 @@ namespace Web.Controllers
 				if (Rslt)
 					return RedirectToAction(nameof(Index));
 			}
-            ViewData["ServiceCategoryId"] = new SelectList(await _ServiceCategoryService.GetList(), "Id", "NameAr");
             if(!ValidRslt.IsValid)
                 ValidRslt.AddToModelState(this.ModelState);
             return View(Model);
@@ -56,7 +52,6 @@ namespace Web.Controllers
 		// GET: ServiceController/Edit/5
 		public async Task<ActionResult> Edit(string id)
 		{
-            ViewData["ServiceCategoryId"] = new SelectList(await _ServiceCategoryService.GetList(), "Id", "NameAr");
             var Entity = await _ServiceService.GetUpdateInfo(id);
 			return View(Entity);
 		}
@@ -73,7 +68,6 @@ namespace Web.Controllers
 				if (Rslt)
 					return RedirectToAction(nameof(Index));
 			}
-            ViewData["ServiceCategoryId"] = new SelectList(await _ServiceCategoryService.GetList(), "Id", "NameAr");
             if(!ValidRslt.IsValid)
                 ValidRslt.AddToModelState(this.ModelState);
             return View(Model);

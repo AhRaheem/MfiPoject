@@ -38,8 +38,8 @@ namespace Infrastructure.UnitOfWork
         private INewsRepository _News;
         public INewsRepository News { get { return _News ?? (new NewsRepository(Context)); } }
 
-        private IProtocolRepository _Protocols;
-        public IProtocolRepository Protocols { get { return _Protocols ?? (new ProtocolRepository(Context)); } }
+        private IProtocolRepository _Protocol;
+        public IProtocolRepository Protocol { get { return _Protocol ?? (new ProtocolRepository(Context)); } }
 
         private IServiceRepository _Service;
         public IServiceRepository Service { get { return _Service ?? (new ServiceRepository(Context)); } }

@@ -16,15 +16,15 @@ namespace Api.Controllers
         {
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Get(string Id)
+        [HttpGet("Get")]
+        public async Task<ActionResult<AchievementDto>> Get(string Id)
         {
             var Data = new AchievementDto();
             return Ok(Data);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
+        [HttpGet("GetAll")]
+        public async Task<ActionResult<List<AchievementDto>>> GetAll()
         {
             var Data = new List<AchievementDto>();
             return Ok(Data);

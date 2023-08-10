@@ -30,15 +30,6 @@ namespace Infrastructure.DtoValidators.Directors
                     return await DirectorsEnNameExits(NameEn, model.Id, cancellation);
                 }).WithMessage("NameAr Is Exits");
 
-            RuleFor(x => x.File).NotNull().WithMessage("File Required").Must(ValidImageOrVideoFile).WithMessage("Invalid File Type");
-        }
-
-        public bool ValidImageOrVideoFile(IFormFile File) 
-        {
-            if (File is null)
-                return true;
-            var Extention = Path.GetExtension(File.FileName).Replace(".","");
-            return _FileService.IsImage(Extention);
         }
 
         public async Task<bool> DirectorsArNameExits(string NameAr, string Id, CancellationToken arg2) 

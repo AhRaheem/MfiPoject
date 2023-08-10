@@ -10,13 +10,13 @@ namespace Web.Controllers
 	public class NewsController : Controller
 	{
 		public readonly INewsService _NewsService;
-		public readonly INewsCategoryService _NewsCategoryService;
+		
         private IValidator<NewsCreateDto> _CreateValidator;
         private IValidator<NewsUpdateDto> _UpdateValidator;
-        public NewsController(INewsService NewsService, INewsCategoryService NewsCategoryService, IValidator<NewsCreateDto> CreateValidator, IValidator<NewsUpdateDto> UpdateValidator)
+        public NewsController(INewsService NewsService, IValidator<NewsCreateDto> CreateValidator, IValidator<NewsUpdateDto> UpdateValidator)
 		{
 			_NewsService = NewsService;
-			_NewsCategoryService = NewsCategoryService;
+			
             _CreateValidator = CreateValidator;
             _UpdateValidator = UpdateValidator;
         }
@@ -30,7 +30,7 @@ namespace Web.Controllers
 		// GET: NewsController/Create
 		public async Task<ActionResult> Create()
 		{
-            ViewData["NewsCategoryId"] = new SelectList(await _NewsCategoryService.GetList(), "Id","NameAr");
+            
 			return View();
 		}
 
@@ -47,7 +47,7 @@ namespace Web.Controllers
 				if (Rslt)
 					return RedirectToAction(nameof(Index));
 			}
-            ViewData["NewsCategoryId"] = new SelectList(await _NewsCategoryService.GetList(), "Id", "NameAr");
+            
             if(!ValidRslt.IsValid)
                 ValidRslt.AddToModelState(this.ModelState);
             return View(Model);
@@ -56,7 +56,7 @@ namespace Web.Controllers
 		// GET: NewsController/Edit/5
 		public async Task<ActionResult> Edit(string id)
 		{
-            ViewData["NewsCategoryId"] = new SelectList(await _NewsCategoryService.GetList(), "Id", "NameAr");
+            
             var Entity = await _NewsService.GetUpdateInfo(id);
 			return View(Entity);
 		}
@@ -73,7 +73,7 @@ namespace Web.Controllers
 				if (Rslt)
 					return RedirectToAction(nameof(Index));
 			}
-            ViewData["NewsCategoryId"] = new SelectList(await _NewsCategoryService.GetList(), "Id", "NameAr");
+            
             if(!ValidRslt.IsValid)
                 ValidRslt.AddToModelState(this.ModelState);
             return View(Model);

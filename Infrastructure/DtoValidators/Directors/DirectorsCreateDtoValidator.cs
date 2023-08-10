@@ -20,13 +20,6 @@ namespace Infrastructure.DtoValidators.Directors
             _DirectorsService = DirectorsService;
             RuleFor(x => x.NameAr).NotNull().WithMessage("Name Required").MustAsync(DirectorsArNameExits).WithMessage("Name Exits");
             RuleFor(x => x.NameEn).NotNull().WithMessage("Name Required").MustAsync(DirectorsEnNameExits).WithMessage("Name Exits");
-            RuleFor(x => x.File).NotNull().WithMessage("File Required").Must(ValidImageOrVideoFile).WithMessage("Msg");
-        }
-
-        public bool ValidImageOrVideoFile(IFormFile File) 
-        {
-            var Extention = Path.GetExtension(File.FileName).Replace(".","");
-            return _FileService.IsImage(Extention);
         }
 
         public async Task<bool> DirectorsArNameExits(string NameAr, CancellationToken arg2)

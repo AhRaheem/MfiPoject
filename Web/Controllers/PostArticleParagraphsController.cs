@@ -1,7 +1,8 @@
 ﻿
 
+using Core.Entites;
 using FluentValidation;
-using Infrastructure.Dtos.PostArticleParagraphs;
+using Infrastructure.Dtos.PostArticleParagraph;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Web.Controllers
@@ -9,14 +10,12 @@ namespace Web.Controllers
 	[Authorize(Roles = "Admin")]
 	public class PostArticleParagraphsController : Controller
 	{
-		public readonly IPostArticleParagraphsService _PostArticleParagraphsService;
-		public readonly IPostArticleParagraphsCategoryService _PostArticleParagraphsCategoryService;
-        private IValidator<PostArticleParagraphsCreateDto> _CreateValidator;
-        private IValidator<PostArticleParagraphsUpdateDto> _UpdateValidator;
-        public PostArticleParagraphsController(IPostArticleParagraphsService PostArticleParagraphsService, IPostArticleParagraphsCategoryService PostArticleParagraphsCategoryService, IValidator<PostArticleParagraphsCreateDto> CreateValidator, IValidator<PostArticleParagraphsUpdateDto> UpdateValidator)
+		public readonly IPostArticleParagraphService _PostArticleParagraphsService;
+        private IValidator<PostArticleParagraphCreateDto> _CreateValidator;
+        private IValidator<PostArticleParagraphUpdateDto> _UpdateValidator;
+        public PostArticleParagraphsController(IPostArticleParagraphService PostArticleParagraphsService, IValidator<PostArticleParagraphCreateDto> CreateValidator, IValidator<PostArticleParagraphUpdateDto> UpdateValidator)
 		{
 			_PostArticleParagraphsService = PostArticleParagraphsService;
-			_PostArticleParagraphsCategoryService = PostArticleParagraphsCategoryService;
             _CreateValidator = CreateValidator;
             _UpdateValidator = UpdateValidator;
         }
@@ -30,14 +29,13 @@ namespace Web.Controllers
 		// GET: PostArticleParagraphsController/Create
 		public async Task<ActionResult> Create()
 		{
-            ViewData["PostArticleParagraphsCategoryId"] = new SelectList(await _PostArticleParagraphsCategoryService.GetList(), "Id","NameAr");
 			return View();
 		}
 
 		// POST: PostArticleParagraphsController/Create
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<ActionResult> Create(PostArticleParagraphsCreateDto Model)
+		public async Task<ActionResult> Create(PostArticleParagraphCreateDto Model)
 		{
 			var ValidRslt = await _CreateValidator.ValidateAsync(Model);
             ValidRslt.AddToModelState(this.ModelState);
@@ -47,7 +45,6 @@ namespace Web.Controllers
 				if (Rslt)
 					return RedirectToAction(nameof(Index));
 			}
-            ViewData["PostArticleParagraphsCategoryId"] = new SelectList(await _PostArticleParagraphsCategoryService.GetList(), "Id", "NameAr");
             if(!ValidRslt.IsValid)
                 ValidRslt.AddToModelState(this.ModelState);
             return View(Model);
@@ -56,7 +53,6 @@ namespace Web.Controllers
 		// GET: PostArticleParagraphsController/Edit/5
 		public async Task<ActionResult> Edit(string id)
 		{
-            ViewData["PostArticleParagraphsCategoryId"] = new SelectList(await _PostArticleParagraphsCategoryService.GetList(), "Id", "NameAr");
             var Entity = await _PostArticleParagraphsService.GetUpdateInfo(id);
 			return View(Entity);
 		}
@@ -64,7 +60,7 @@ namespace Web.Controllers
 		// POST: PostArticleParagraphsController/Edit/5
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<ActionResult> Edit(PostArticleParagraphsUpdateDto Model)
+		public async Task<ActionResult> Edit(PostArticleParagraphUpdateDto Model)
 		{
             var ValidRslt = await _UpdateValidator.ValidateAsync(Model);
             if (ValidRslt.IsValid)
@@ -73,7 +69,6 @@ namespace Web.Controllers
 				if (Rslt)
 					return RedirectToAction(nameof(Index));
 			}
-            ViewData["PostArticleParagraphsCategoryId"] = new SelectList(await _PostArticleParagraphsCategoryService.GetList(), "Id", "NameAr");
             if(!ValidRslt.IsValid)
                 ValidRslt.AddToModelState(this.ModelState);
             return View(Model);

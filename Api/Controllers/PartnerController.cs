@@ -2,6 +2,7 @@
 using Infrastructure.Dtos.AboutUs;
 using Infrastructure.Dtos.News;
 using Infrastructure.Dtos.Partner;
+using Infrastructure.Dtos.ProfileInfo;
 using Infrastructure.Services.Contracts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,8 +17,15 @@ namespace Api.Controllers
         {
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
+        [HttpGet("Get")]
+        public async Task<ActionResult<PartnerDto>> Get(string Id)
+        {
+            var Data = new PartnerDto();
+            return Ok(Data);
+        }
+
+        [HttpGet("GetAll")]
+        public async Task<ActionResult<List<PartnerDto>>> GetAll(int Page)
         {
             var Data = new List<PartnerDto>();
             return Ok(Data);

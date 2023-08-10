@@ -10,13 +10,11 @@ namespace Web.Controllers
 	public class NewsRelatedGalleriesController : Controller
 	{
 		public readonly INewsRelatedGalleryService _NewsRelatedGalleryService;
-		public readonly INewsRelatedGalleriesCategoryService _NewsRelatedGalleriesCategoryService;
-        private IValidator<NewsRelatedGalleriesCreateDto> _CreateValidator;
-        private IValidator<NewsRelatedGalleriesUpdateDto> _UpdateValidator;
-        public NewsRelatedGalleriesController(INewsRelatedGalleryService NewsRelatedGalleryService, INewsRelatedGalleriesCategoryService NewsRelatedGalleriesCategoryService, IValidator<NewsRelatedGalleriesCreateDto> CreateValidator, IValidator<NewsRelatedGalleriesUpdateDto> UpdateValidator)
+        private IValidator<NewsRelatedGalleryCreateDto> _CreateValidator;
+        private IValidator<NewsRelatedGalleryUpdateDto> _UpdateValidator;
+        public NewsRelatedGalleriesController(INewsRelatedGalleryService NewsRelatedGalleryService, IValidator<NewsRelatedGalleryCreateDto> CreateValidator, IValidator<NewsRelatedGalleryUpdateDto> UpdateValidator)
 		{
 			_NewsRelatedGalleryService = NewsRelatedGalleryService;
-			_NewsRelatedGalleriesCategoryService = NewsRelatedGalleriesCategoryService;
             _CreateValidator = CreateValidator;
             _UpdateValidator = UpdateValidator;
         }
@@ -30,7 +28,6 @@ namespace Web.Controllers
 		// GET: NewsRelatedGalleriesController/Create
 		public async Task<ActionResult> Create()
 		{
-            ViewData["NewsRelatedGalleriesCategoryId"] = new SelectList(await _NewsRelatedGalleriesCategoryService.GetList(), "Id","NameAr");
 			return View();
 		}
 
@@ -47,7 +44,6 @@ namespace Web.Controllers
 				if (Rslt)
 					return RedirectToAction(nameof(Index));
 			}
-            ViewData["NewsRelatedGalleriesCategoryId"] = new SelectList(await _NewsRelatedGalleriesCategoryService.GetList(), "Id", "NameAr");
             if(!ValidRslt.IsValid)
                 ValidRslt.AddToModelState(this.ModelState);
             return View(Model);
@@ -56,7 +52,6 @@ namespace Web.Controllers
 		// GET: NewsRelatedGalleriesController/Edit/5
 		public async Task<ActionResult> Edit(string id)
 		{
-            ViewData["NewsRelatedGalleriesCategoryId"] = new SelectList(await _NewsRelatedGalleriesCategoryService.GetList(), "Id", "NameAr");
             var Entity = await _NewsRelatedGalleryService.GetUpdateInfo(id);
 			return View(Entity);
 		}
@@ -73,7 +68,6 @@ namespace Web.Controllers
 				if (Rslt)
 					return RedirectToAction(nameof(Index));
 			}
-            ViewData["NewsRelatedGalleriesCategoryId"] = new SelectList(await _NewsRelatedGalleriesCategoryService.GetList(), "Id", "NameAr");
             if(!ValidRslt.IsValid)
                 ValidRslt.AddToModelState(this.ModelState);
             return View(Model);

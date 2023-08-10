@@ -9,14 +9,12 @@ namespace Web.Controllers
 	[Authorize(Roles = "Admin")]
 	public class PostServiceParagraphImageController : Controller
 	{
-		public readonly IPostServiceParagraphImageService _partnerService;
-		public readonly IPostServiceParagraphImageCategoryService _partnerCategoryService;
+		public readonly IPostServiceParagraphImageService _PostServiceParagraphImageService;
         private IValidator<PostServiceParagraphImageCreateDto> _CreateValidator;
         private IValidator<PostServiceParagraphImageUpdateDto> _UpdateValidator;
-        public PostServiceParagraphImageController(IPostServiceParagraphImageService partnerService, IPostServiceParagraphImageCategoryService partnerCategoryService, IValidator<PostServiceParagraphImageCreateDto> CreateValidator, IValidator<PostServiceParagraphImageUpdateDto> UpdateValidator)
+        public PostServiceParagraphImageController(IPostServiceParagraphImageService PostServiceParagraphImageService, IValidator<PostServiceParagraphImageCreateDto> CreateValidator, IValidator<PostServiceParagraphImageUpdateDto> UpdateValidator)
 		{
-			_partnerService = partnerService;
-			_partnerCategoryService = partnerCategoryService;
+			_PostServiceParagraphImageService = PostServiceParagraphImageService;
             _CreateValidator = CreateValidator;
             _UpdateValidator = UpdateValidator;
         }
@@ -24,13 +22,12 @@ namespace Web.Controllers
 		// GET: PostServiceParagraphImageController
 		public async Task<ActionResult> Index(string? q,int page=1, int size=10)
 		{
-			return View(await _partnerService.GetAll(q,page,size));
+			return View(await _PostServiceParagraphImageService.GetAll(q,page,size));
 		}
 
 		// GET: PostServiceParagraphImageController/Create
 		public async Task<ActionResult> Create()
 		{
-            ViewData["PostServiceParagraphImageCategoryId"] = new SelectList(await _partnerCategoryService.GetList(), "Id","NameAr");
 			return View();
 		}
 
@@ -43,11 +40,10 @@ namespace Web.Controllers
             ValidRslt.AddToModelState(this.ModelState);
             if (ValidRslt.IsValid) 
 			{
-				var Rslt = await _partnerService.Create(Model);
+				var Rslt = await _PostServiceParagraphImageService.Create(Model);
 				if (Rslt)
 					return RedirectToAction(nameof(Index));
 			}
-            ViewData["PostServiceParagraphImageCategoryId"] = new SelectList(await _partnerCategoryService.GetList(), "Id", "NameAr");
             if(!ValidRslt.IsValid)
                 ValidRslt.AddToModelState(this.ModelState);
             return View(Model);
@@ -56,8 +52,7 @@ namespace Web.Controllers
 		// GET: PostServiceParagraphImageController/Edit/5
 		public async Task<ActionResult> Edit(string id)
 		{
-            ViewData["PostServiceParagraphImageCategoryId"] = new SelectList(await _partnerCategoryService.GetList(), "Id", "NameAr");
-            var Entity = await _partnerService.GetUpdateInfo(id);
+            var Entity = await _PostServiceParagraphImageService.GetUpdateInfo(id);
 			return View(Entity);
 		}
 
@@ -69,11 +64,10 @@ namespace Web.Controllers
             var ValidRslt = await _UpdateValidator.ValidateAsync(Model);
             if (ValidRslt.IsValid)
 			{
-				var Rslt = await _partnerService.Update(Model);
+				var Rslt = await _PostServiceParagraphImageService.Update(Model);
 				if (Rslt)
 					return RedirectToAction(nameof(Index));
 			}
-            ViewData["PostServiceParagraphImageCategoryId"] = new SelectList(await _partnerCategoryService.GetList(), "Id", "NameAr");
             if(!ValidRslt.IsValid)
                 ValidRslt.AddToModelState(this.ModelState);
             return View(Model);
@@ -84,7 +78,7 @@ namespace Web.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<ActionResult> Delete(string id)
 		{
-			var Rslt = await _partnerService.Delete(id);
+			var Rslt = await _PostServiceParagraphImageService.Delete(id);
 			return RedirectToAction(nameof(Index));
 		}
 	}

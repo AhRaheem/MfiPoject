@@ -27,8 +27,8 @@ namespace Api.Controllers
             _AboutUsService = AboutUsService;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Get()
+        [HttpGet("Get")]
+        public async Task<ActionResult<MainPageModel>> Get()
         {
             var Lang = Request.GetLanguage();
 

@@ -16,15 +16,15 @@ namespace Api.Controllers
         {
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Get(string Id)
+        [HttpGet("Get")]
+        public async Task<ActionResult<ServiceDto>> Get(string Id)
         {
             var Data = new ServiceDto();
             return Ok(Data);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
+        [HttpGet("GetAll")]
+        public async Task<ActionResult<List<ServiceDto>>> GetAll(int Page)
         {
             var Data = new List<ServiceDto>();
             return Ok(Data);

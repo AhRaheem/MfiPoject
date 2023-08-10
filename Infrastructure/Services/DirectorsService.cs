@@ -19,7 +19,6 @@ namespace Infrastructure.Services
 
 		public async Task<bool> Create(DirectorsCreateDto Dto)
 		{
-			Dto.FileId = await _fileService.Create(Dto.File);
 			await _unitOfWork.Directors.Add(_mapper.Map<Directors>(Dto));
 			return (await _unitOfWork.Save()) > 0;
 		}
@@ -29,7 +28,6 @@ namespace Infrastructure.Services
 			var Entity = await _unitOfWork.Directors.GetById(Id);
 			if (Entity is null)
 				return false;
-			await _fileService.Delete(Entity.FileId);
 			await _unitOfWork.Directors.Delete(Entity);
 			return (await _unitOfWork.Save()) > 0;
 		}
@@ -52,8 +50,6 @@ namespace Infrastructure.Services
 		public async Task<bool> Update(DirectorsUpdateDto Dto)
 		{
 			var Entity = _mapper.Map<Directors>(Dto);
-			if (Dto.File != null)
-				Entity.FileId = await _fileService.Create(Dto.File);
 			await _unitOfWork.Directors.Update(Entity);
 			return (await _unitOfWork.Save()) > 0;
 		}
