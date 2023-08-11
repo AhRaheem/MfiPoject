@@ -12,21 +12,16 @@ namespace Api.Controllers
     [ApiController]
     public class ProfileInfoController : ControllerBase
     {
-        public ProfileInfoController()
+        public readonly IProfileInfoService _ProfileInfoUsService;
+        public ProfileInfoController(IProfileInfoService profileInfoUsService)
         {
+            _ProfileInfoUsService = profileInfoUsService;
         }
 
         [HttpGet("Get")]
-        public async Task<ActionResult<ProfileInfoDto>> Get(string Id)
+        public async Task<ActionResult<List<ProfileInfoDto>>> Get(int Page)
         {
-            var Data = new ProfileInfoDto();
-            return Ok(Data);
-        }
-
-        [HttpGet("GetAll")]
-        public async Task<ActionResult<List<ProfileInfoDto>>> GetAll(int Page)
-        {
-            var Data = new List<ProfileInfoDto>();
+            var Data = await _ProfileInfoUsService.GetAll("");
             return Ok(Data);
         }
     }

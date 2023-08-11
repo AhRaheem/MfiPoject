@@ -8,7 +8,7 @@
 
 	//	Task<bool> Delete(string Id);
 
-	//	Task<PaginatedList<PostDto>> GetAll(PostType PostType, string q= "", int page = 0, int size = 10);
+	//	Task<PaginatedList<PostDto>> GetAll(PostType PostType, string q= "", int page = 1, int size = 10);
 
 	//	Task<PostDto> GetById(string Id);
  //       Task<PostDto> GetByArName(string Name);

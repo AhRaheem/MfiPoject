@@ -11,21 +11,25 @@ namespace Api.Controllers
     [ApiController]
     public class RelatedWebsiteController : ControllerBase
     {
-        public RelatedWebsiteController()
+        public readonly IRelatedWebsiteService _RelatedWebsiteService;
+        public RelatedWebsiteController(IRelatedWebsiteService relatedWebsiteService)
         {
+            _RelatedWebsiteService = relatedWebsiteService;
         }
 
         [HttpGet("Get")]
         public async Task<ActionResult<RelatedWebsiteDto>> Get(string Id)
         {
-            var Data = new RelatedWebsiteDto();
+            var Data = await _RelatedWebsiteService.GetById(Id);
+            if (Data is null)
+                return NotFound();
             return Ok(Data);
         }
 
         [HttpGet("GetAll")]
-        public async Task<ActionResult<List<RelatedWebsiteDto>>> GetAll(int Page = 0)
+        public async Task<ActionResult<List<RelatedWebsiteDto>>> GetAll(int Page = 1)
         {
-            var Data = new List<RelatedWebsiteDto>();
+            var Data = await _RelatedWebsiteService.GetAll(page:Page,size:6);
             return Ok(Data);
         }
     }

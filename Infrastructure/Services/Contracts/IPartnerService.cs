@@ -10,7 +10,7 @@ namespace Infrastructure.Services.Contracts
 
 		Task<bool> Delete(string Id);
 
-		Task<PaginatedList<PartnerDto>> GetAll(string q= "", int page = 0, int size = 10);
+		Task<PaginatedList<PartnerDto>> GetAll(string q= "", int page = 1, int size = 10);
 
 		Task<PartnerDto> GetById(string Id);
         Task<PartnerDto> GetByArName(string Name);

@@ -43,7 +43,7 @@ namespace Infrastructure.Services
 			return Rslt == IdentityResult.Success;
 		}
 
-		public async Task<PaginatedList<UserDto>> GetAll(string q = "", int page = 0, int size = 10)
+		public async Task<PaginatedList<UserDto>> GetAll(string q = "", int page = 1, int size = 10)
 		{
 			var Usrs = _UsrMngr.Users;
 			return await Usrs.ProjectTo<UserDto>(_mapper.ConfigurationProvider)

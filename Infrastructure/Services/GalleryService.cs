@@ -33,7 +33,7 @@ namespace Infrastructure.Services
 			return (await _unitOfWork.Save()) > 0;
 		}
 
-		public async Task<PaginatedList<GalleryDto>> GetAll(string? q , int page = 0, int size = 10)
+		public async Task<PaginatedList<GalleryDto>> GetAll(string? q , int page = 1, int size = 10)
 		{
 			var Qry = _unitOfWork.Gallery.GetAllQuery(predicate: x => !x.IsDeleted, page: page, size: size);
 			if (!string.IsNullOrWhiteSpace(q))
@@ -42,7 +42,7 @@ namespace Infrastructure.Services
 				.PaginatedListAsync(page, size);
 		}
 
-		public async Task<PaginatedList<GalleryDto>> GetAllWithItems(string? q, int page = 0, int size = 10)
+		public async Task<PaginatedList<GalleryDto>> GetAllWithItems(string? q, int page = 1, int size = 10)
 		{
 			var Qry = _unitOfWork.Gallery.GetAllQuery(predicate: x => !x.IsDeleted, page: page, size: size, include : x=>x.Include(g=>g.Items.Where(i=>!i.IsDeleted)));
 			if (!string.IsNullOrWhiteSpace(q))

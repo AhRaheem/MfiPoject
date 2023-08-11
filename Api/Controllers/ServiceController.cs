@@ -12,21 +12,26 @@ namespace Api.Controllers
     [ApiController]
     public class ServiceController : ControllerBase
     {
-        public ServiceController()
+        public readonly IServiceService _ServiceService;
+
+        public ServiceController(IServiceService ServiceService)
         {
+            _ServiceService = ServiceService;
         }
 
         [HttpGet("Get")]
         public async Task<ActionResult<ServiceDto>> Get(string Id)
         {
-            var Data = new ServiceDto();
+            var Data = await _ServiceService.GetById(Id);
+            if(Data is null)
+                return NotFound();
             return Ok(Data);
         }
 
         [HttpGet("GetAll")]
-        public async Task<ActionResult<List<ServiceDto>>> GetAll(int Page)
+        public async Task<ActionResult<List<ServiceDto>>> GetAll(int Page=1)
         {
-            var Data = new List<ServiceDto>();
+            var Data = await _ServiceService.GetAll(page:Page,size:6);
             return Ok(Data);
         }
     }

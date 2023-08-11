@@ -32,7 +32,7 @@ namespace Infrastructure.Services
 			return (await _unitOfWork.Save()) > 0;
 		}
 
-		public async Task<PaginatedList<NewsRelatedNewsDto>> GetAll(string q = "", int page = 0, int size = 10)
+		public async Task<PaginatedList<NewsRelatedNewsDto>> GetAll(string q = "", int page = 1, int size = 10)
 		{
 			var Qry = _unitOfWork.NewsRelatedNews.GetAllQuery(predicate: x => !x.IsDeleted, page: page, size: size);
 			return await Qry.ProjectTo<NewsRelatedNewsDto>(_mapper.ConfigurationProvider)

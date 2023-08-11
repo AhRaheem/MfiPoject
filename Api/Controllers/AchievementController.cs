@@ -12,21 +12,26 @@ namespace Api.Controllers
     [ApiController]
     public class AchievementController : ControllerBase
     {
-        public AchievementController()
+        public readonly IAchievementService _AchievementService;
+
+        public AchievementController(IAchievementService achievementService)
         {
+            _AchievementService = achievementService;
         }
 
         [HttpGet("Get")]
         public async Task<ActionResult<AchievementDto>> Get(string Id)
         {
-            var Data = new AchievementDto();
+            var Data = await _AchievementService.GetById(Id);
+            if (Data is null)
+                return NotFound();
             return Ok(Data);
         }
 
         [HttpGet("GetAll")]
-        public async Task<ActionResult<List<AchievementDto>>> GetAll()
+        public async Task<ActionResult<List<AchievementDto>>> GetAll(int Page = 1)
         {
-            var Data = new List<AchievementDto>();
+            var Data = await _AchievementService.GetAll(page: Page, size:6);
             return Ok(Data);
         }
     }

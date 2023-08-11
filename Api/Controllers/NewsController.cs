@@ -12,21 +12,25 @@ namespace Api.Controllers
     [ApiController]
     public class NewsController : ControllerBase
     {
-        public NewsController()
+        public readonly INewsService _NewsService;
+        public NewsController(INewsService newsService)
         {
+            _NewsService = newsService;
         }
 
         [HttpGet("Get")]
         public async Task<ActionResult<NewsDto>> Get(string Id)
         {
-            var Data = new NewsDto();
+            var Data = await _NewsService.GetById(Id);
+            if(Data is null)
+                return NotFound();
             return Ok(Data);
         }
 
         [HttpGet("GetAll")]
-        public async Task<ActionResult<List<NewsDto>>> GetAll(int Page)
+        public async Task<ActionResult<List<NewsDto>>> GetAll(int Page=1)
         {
-            var Data = new List<NewsDto>();
+            var Data = await _NewsService.GetAll(page:Page,size:6);
             return Ok(Data);
         }
     }

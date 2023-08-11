@@ -10,14 +10,17 @@ namespace Api.Controllers
     [ApiController]
     public class AboutUsController : ControllerBase
     {
-        public AboutUsController()
+        public readonly IAboutUsService _AboutUsService;
+        public AboutUsController(IAboutUsService aboutUsService)
         {
+            _AboutUsService = aboutUsService;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Get()
+        [HttpGet("Get")]
+        public async Task<ActionResult<AboutUsDto>> Get()
         {
-            return Ok("");
+            var Data = await _AboutUsService.GetUpdateInfo();
+            return Ok(Data);
         }
     }
 }

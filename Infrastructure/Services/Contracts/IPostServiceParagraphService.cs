@@ -13,7 +13,7 @@ namespace Infrastructure.Services.Contracts
 
 		Task<bool> Delete(string Id);
 
-		Task<PaginatedList<PostServiceParagraphDto>> GetAll(string q= "", int page = 0, int size = 10);
+		Task<PaginatedList<PostServiceParagraphDto>> GetAll(string q= "", int page = 1, int size = 10);
 
 		Task<PostServiceParagraphDto> GetById(string Id);
         Task<PostServiceParagraphDto> GetByArName(string Name);

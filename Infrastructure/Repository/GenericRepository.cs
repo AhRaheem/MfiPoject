@@ -20,7 +20,7 @@ namespace Infrastructure.Repository
             _dbContext = context;
         }
 		
-		public async Task<IEnumerable<T>> GetAll(Expression<Func<T, bool>>? predicate = null, Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null, int page = 0, int size = 10, bool enableTracking = true)
+		public async Task<IEnumerable<T>> GetAll(Expression<Func<T, bool>>? predicate = null, Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null, int page = 1, int size = 10, bool enableTracking = true)
 		{
 			IQueryable<T> query = _dbContext.Set<T>();
 
@@ -31,7 +31,7 @@ namespace Infrastructure.Repository
 			return await query.OrderByDescending(x=>x.CreatedOn).Skip(page * size).Take(size).ToListAsync();
 		}
 
-		public IQueryable<T> GetAllQuery(Expression<Func<T, bool>>? predicate = null, Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null, int page = 0, int size = 10, bool enableTracking = true)
+		public IQueryable<T> GetAllQuery(Expression<Func<T, bool>>? predicate = null, Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null, int page = 1, int size = 10, bool enableTracking = true)
 		{
 			IQueryable<T> query = _dbContext.Set<T>();
 			if (!enableTracking) query = query.AsNoTracking();

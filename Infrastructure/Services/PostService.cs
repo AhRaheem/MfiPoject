@@ -32,7 +32,7 @@ namespace Infrastructure.Services
 	//		return (await _unitOfWork.Save()) > 0;
 	//	}
 
-	//	public async Task<PaginatedList<PostDto>> GetAll(PostType PostType, string q = "", int page = 0, int size = 10)
+	//	public async Task<PaginatedList<PostDto>> GetAll(PostType PostType, string q = "", int page = 1, int size = 10)
 	//	{
 	//		var Qry = _unitOfWork.Post.GetAllQuery(predicate: x => !x.IsDeleted && x.PostType == PostType, page: page, size: size);
 	//		if (!string.IsNullOrWhiteSpace(q))

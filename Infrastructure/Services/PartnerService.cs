@@ -32,7 +32,7 @@ namespace Infrastructure.Services
 			return (await _unitOfWork.Save()) > 0;
 		}
 
-		public async Task<PaginatedList<PartnerDto>> GetAll(string q = "", int page = 0, int size = 10)
+		public async Task<PaginatedList<PartnerDto>> GetAll(string q = "", int page = 1, int size = 10)
 		{
 			var Qry = _unitOfWork.Partner.GetAllQuery(predicate: x => !x.IsDeleted, page: page, size: size);
 			if (!string.IsNullOrWhiteSpace(q))
