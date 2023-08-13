@@ -8,7 +8,7 @@
 
 		Task<bool> Delete(string Id);
 
-		Task<PaginatedList<GalleryDto>> GetAll(string q = "", int page = 0,int size =10);
+		Task<PaginatedList<GalleryDto>> GetAll(DateTime? FromDate, DateTime? ToDate, string q = "", int page = 1, int size = 10);
 		Task<PaginatedList<GalleryDto>> GetAllWithItems(string q = "", int page = 0,int size =10);
 
 		Task<GalleryDto> GetById(string Id);

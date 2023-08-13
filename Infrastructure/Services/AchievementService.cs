@@ -1,6 +1,7 @@
 ﻿
 
 using Infrastructure.Dtos.Achievement;
+using Infrastructure.Dtos.News;
 using Infrastructure.Dtos.Protocol;
 
 namespace Infrastructure.Services
@@ -44,7 +45,13 @@ namespace Infrastructure.Services
 				.PaginatedListAsync(page, size);
 		}
 
-		public async Task<AchievementDto> GetById(string Id)
+        public async Task<List<AchievementDto>> GetHomeAchievments()
+        {
+            var Entities = await _unitOfWork.Achievement.GetAll(x => x.HomePost);
+            return _mapper.Map<List<AchievementDto>>(Entities);
+        }
+
+        public async Task<AchievementDto> GetById(string Id)
 		{
 			var Entity = await _unitOfWork.Achievement.GetById(Id);
 			return _mapper.Map<AchievementDto>(Entity);

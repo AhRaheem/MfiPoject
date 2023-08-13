@@ -1,4 +1,5 @@
 ﻿using Infrastructure.Dtos.PostArticleParagraph;
+using Infrastructure.Dtos.PostServiceParagraph;
 using Infrastructure.Dtos.PostServiceParagraphImage;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,6 @@ namespace Infrastructure.Dtos.Service
         public string? IntroEn { get; set; }
 
         public virtual ICollection<PostAffiliateLawDto>? AffiliateLaws { get; set; }
-        public virtual ICollection<PostArticleParagraphDto>? PostArticleParagraphs { get; set; }
-        public virtual ICollection<PostServiceParagraphImageDto>? PostServiceParagraphImages { get; set; }
+        public virtual ICollection<PostServiceParagraphDto>? PostServiceParagraphDtos { get; set; }
     }
 }

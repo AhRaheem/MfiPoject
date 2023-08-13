@@ -46,48 +46,48 @@ namespace Api.Controllers
         {
             var Lang = Request.GetLanguage();
 
-            var AboutUsInfo = (await _AboutUsService.GetUpdateInfo());
+            //var AboutUsInfo = (await _AboutUsService.GetUpdateInfo());
 
-            var TittledServices = await _ServiceService.GetTittled();
-            var TittledNews = await _NewsService.GetTittled();
-            var TittledAchievments = await _AchievementService.GetTittled();
-            var TittledProtocols = await _ProtocolService.GetTittled();
+            //var TittledServices = await _ServiceService.GetTittled();
+            //var TittledNews = await _NewsService.GetTittled();
+            //var TittledAchievments = await _AchievementService.GetTittled();
+            //var TittledProtocols = await _ProtocolService.GetTittled();
 
-            var BanneredServices = await _ServiceService.GetBannered();
-            var BanneredNews = await _NewsService.GetBannered();
-            var BanneredAchievments = await _AchievementService.GetBannered();
-            var BanneredProtocols = await _ProtocolService.GetBannered();
+            //var BanneredServices = await _ServiceService.GetBannered();
+            //var BanneredNews = await _NewsService.GetBannered();
+            //var BanneredAchievments = await _AchievementService.GetBannered();
+            //var BanneredProtocols = await _ProtocolService.GetBannered();
 
-            var ServicesInfo = (await _ServiceService.GetAll(page: 1, size: 6)).Items;
-            var GalleriesInfo = (await _GalleryService.GetAll(page: 1,size: 10)).Items;
-            var PartnersInfo = (await _PartnerService.GetAll(page: 1, size: 6)).Items;
-            var RelatedWebsitesInfo = (await _RelatedWebsiteService.GetAll(page: 1, size: 6)).Items;
+            //var ServicesInfo = (await _ServiceService.GetAll(page: 1, size: 6)).Items;
+            //var GalleriesInfo = (await _GalleryService.GetAll(page: 1,size: 10)).Items;
+            //var PartnersInfo = (await _PartnerService.GetAll(page: 1, size: 6)).Items;
+            //var RelatedWebsitesInfo = (await _RelatedWebsiteService.GetAll(page: 1, size: 6)).Items;
 
             var Data = new MainPageModel();
 
-            if (TittledServices.Count > 0)
-                Data.TittledPosts.AddRange(_mapper.Map<List<TittledModel>>(TittledServices));
-            if (TittledNews.Count > 0)
-                Data.TittledPosts.AddRange(_mapper.Map<List<TittledModel>>(TittledNews));
-            if (TittledAchievments.Count > 0)
-                Data.TittledPosts.AddRange(_mapper.Map<List<TittledModel>>(TittledAchievments));
-            if (TittledProtocols.Count > 0)
-                Data.TittledPosts.AddRange(_mapper.Map<List<TittledModel>>(TittledProtocols));
-            if (BanneredServices.Count > 0)
-                Data.BanneredPosts.AddRange(_mapper.Map<List<BanneredModel>>(BanneredServices));
-            if (BanneredNews.Count > 0)
-                Data.BanneredPosts.AddRange(_mapper.Map<List<BanneredModel>>(BanneredNews));
-            if (BanneredAchievments.Count > 0)
-                Data.BanneredPosts.AddRange(_mapper.Map<List<BanneredModel>>(BanneredAchievments));
-            if (ServicesInfo.Count > 0)
-                Data.BanneredPosts.AddRange(_mapper.Map<List<BanneredModel>>(BanneredProtocols));
-            if (ServicesInfo.Count > 0)
-                Data.Services = _mapper.Map<List<HomePostModel>>(ServicesInfo);
-            Data.Galleries = GalleriesInfo;
-            Data.Partners = PartnersInfo;
-            Data.RelatedWebsites = RelatedWebsitesInfo;
-            if(AboutUsInfo is not null)
-                Data.AboutsUsIntro = Lang == "ar" ? AboutUsInfo.IntroAr : AboutUsInfo.IntroEn;
+            //if (TittledServices.Count > 0)
+            //    Data.TittledPosts.AddRange(_mapper.Map<List<TittledModel>>(TittledServices));
+            //if (TittledNews.Count > 0)
+            //    Data.TittledPosts.AddRange(_mapper.Map<List<TittledModel>>(TittledNews));
+            //if (TittledAchievments.Count > 0)
+            //    Data.TittledPosts.AddRange(_mapper.Map<List<TittledModel>>(TittledAchievments));
+            //if (TittledProtocols.Count > 0)
+            //    Data.TittledPosts.AddRange(_mapper.Map<List<TittledModel>>(TittledProtocols));
+            //if (BanneredServices.Count > 0)
+            //    Data.BanneredPosts.AddRange(_mapper.Map<List<BanneredModel>>(BanneredServices));
+            //if (BanneredNews.Count > 0)
+            //    Data.BanneredPosts.AddRange(_mapper.Map<List<BanneredModel>>(BanneredNews));
+            //if (BanneredAchievments.Count > 0)
+            //    Data.BanneredPosts.AddRange(_mapper.Map<List<BanneredModel>>(BanneredAchievments));
+            //if (ServicesInfo.Count > 0)
+            //    Data.BanneredPosts.AddRange(_mapper.Map<List<BanneredModel>>(BanneredProtocols));
+            //if (ServicesInfo.Count > 0)
+            //    Data.Services = _mapper.Map<List<HomePostModel>>(ServicesInfo);
+            //Data.Galleries = GalleriesInfo;
+            //Data.Partners = PartnersInfo;
+            //Data.RelatedWebsites = RelatedWebsitesInfo;
+            //if(AboutUsInfo is not null)
+            //    Data.AboutsUsIntro = Lang == "ar" ? AboutUsInfo.IntroAr : AboutUsInfo.IntroEn;
             return Ok(Data);
         }
     }

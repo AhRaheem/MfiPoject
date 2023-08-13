@@ -5,6 +5,7 @@ using Infrastructure.Dtos.NewsRelatedNews;
 using Infrastructure.Dtos.Post;
 using Infrastructure.Dtos.PostArticleParagraph;
 using Infrastructure.Dtos.Protocol;
+using Infrastructure.Utiltes;
 
 namespace Api.Models
 {
@@ -18,7 +19,8 @@ namespace Api.Models
         public string? IntroAr { get; set; }
         public string? IntroEn { get; set; }
         public DateTime CreatedOn { get; set; }
-
+        public DateTime? BreakingFrom { get; set; }
+        public DateTime? BreakingTo { get; set; }
 
 
         public virtual ICollection<PostArticleParagraphDto>? PostArticleParagraphs { get; set; }

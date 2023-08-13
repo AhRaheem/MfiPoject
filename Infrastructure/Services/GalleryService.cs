@@ -33,12 +33,16 @@ namespace Infrastructure.Services
 			return (await _unitOfWork.Save()) > 0;
 		}
 
-		public async Task<PaginatedList<GalleryDto>> GetAll(string? q , int page = 1, int size = 10)
+		public async Task<PaginatedList<GalleryDto>> GetAll(DateTime? FromDate, DateTime? ToDate, string q = "", int page = 1, int size = 10)
 		{
 			var Qry = _unitOfWork.Gallery.GetAllQuery(predicate: x => !x.IsDeleted, page: page, size: size);
-			if (!string.IsNullOrWhiteSpace(q))
-				Qry = Qry.Where(x => x.TitleAr.Contains(q) || x.TitleEn.Contains(q));
-			return await Qry.ProjectTo<GalleryDto>(_mapper.ConfigurationProvider)
+            if (!string.IsNullOrWhiteSpace(q))
+                Qry = Qry.Where(x => x.TitleAr.Contains(q) || x.TitleEn.Contains(q));
+            if (FromDate.HasValue || FromDate.Value > DateTime.MinValue)
+                Qry = Qry.Where(x => x.CreatedOn >= FromDate);
+            if (ToDate.HasValue || ToDate.Value > DateTime.MinValue)
+                Qry = Qry.Where(x => x.CreatedOn <= ToDate);
+            return await Qry.ProjectTo<GalleryDto>(_mapper.ConfigurationProvider)
 				.PaginatedListAsync(page, size);
 		}
 

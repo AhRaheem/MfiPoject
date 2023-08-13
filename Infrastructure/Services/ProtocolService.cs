@@ -1,5 +1,6 @@
 ﻿
 
+using Infrastructure.Dtos.News;
 using Infrastructure.Dtos.Protocol;
 using Infrastructure.Dtos.Service;
 
@@ -48,7 +49,7 @@ namespace Infrastructure.Services
 				.PaginatedListAsync(page, size);
 		}
 
-		public async Task<ProtocolDto> GetById(string Id)
+        public async Task<ProtocolDto> GetById(string Id)
 		{
 			var Entity = await _unitOfWork.Protocol.GetById(Id);
 			return _mapper.Map<ProtocolDto>(Entity);

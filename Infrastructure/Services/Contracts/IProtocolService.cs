@@ -1,5 +1,6 @@
 ﻿
 
+using Infrastructure.Dtos.News;
 using Infrastructure.Dtos.Protocol;
 using Infrastructure.Dtos.Service;
 
@@ -22,5 +23,6 @@ namespace Infrastructure.Services.Contracts
         Task<ProtocolUpdateDto> GetUpdateInfo(string Id);
         Task<List<ProtocolDto>> GetTittled();
         Task<List<ProtocolDto>> GetBannered();
+
     }
 }

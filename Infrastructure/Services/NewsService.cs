@@ -35,7 +35,7 @@ namespace Infrastructure.Services
 			return (await _unitOfWork.Save()) > 0;
 		}
 
-		public async Task<PaginatedList<NewsDto>> GetAll(string q = "", DateTime? FromDate, DateTime? ToDate, int page = 1, int size = 10)
+		public async Task<PaginatedList<NewsDto>> GetAll(DateTime? FromDate, DateTime? ToDate, string q = "",  int page = 1, int size = 10)
 		{
 			var Qry = _unitOfWork.News.GetAllQuery(predicate: x => !x.IsDeleted, page: page, size: size);
 			if (!string.IsNullOrWhiteSpace(q))
@@ -48,7 +48,13 @@ namespace Infrastructure.Services
 				.PaginatedListAsync(page, size);
 		}
 
-		public async Task<NewsDto> GetById(string Id)
+		public async Task<List<NewsDto>> GetHomeNews() 
+		{
+			var Entities = await _unitOfWork.News.GetAll(x => x.HomePost);
+			return _mapper.Map<List<NewsDto>>(Entities);
+		}
+
+        public async Task<NewsDto> GetById(string Id)
 		{
 			var Entity = await _unitOfWork.News.GetById(Id);
 			return _mapper.Map<NewsDto>(Entity);

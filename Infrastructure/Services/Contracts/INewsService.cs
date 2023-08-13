@@ -13,7 +13,7 @@ namespace Infrastructure.Services.Contracts
 
 		Task<bool> Delete(string Id);
 
-		Task<PaginatedList<NewsDto>> GetAll(string q= "", DateTime? FromDate, DateTime? ToDate, int page = 1, int size = 10);
+		Task<PaginatedList<NewsDto>> GetAll(DateTime? FromDate, DateTime? ToDate, string q = "", int page = 1, int size = 10);
 
 		Task<NewsDto> GetById(string Id);
         Task<NewsDto> GetByArName(string Name);
@@ -22,5 +22,6 @@ namespace Infrastructure.Services.Contracts
         Task<NewsUpdateDto> GetUpdateInfo(string Id);
         Task<List<NewsDto>> GetTittled();
         Task<List<NewsDto>> GetBannered();
+        Task<List<NewsDto>> GetHomeNews();
     }
 }
