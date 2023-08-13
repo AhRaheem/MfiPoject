@@ -29,9 +29,9 @@ namespace Api.Controllers
         }
 
         [HttpGet("GetAll")]
-        public async Task<ActionResult<List<ServiceDto>>> GetAll(int Page=1)
+        public async Task<ActionResult<List<ServiceDto>>> GetAll(int Page = 1, int Size = 9)
         {
-            var Data = await _ServiceService.GetAll(page:Page,size:6);
+            var Data = await _ServiceService.GetAll(page: Page, size: Size);
             return Ok(Data);
         }
     }

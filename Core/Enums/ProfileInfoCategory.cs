@@ -9,6 +9,8 @@ namespace Core.Enums
 		Fax,
 		Address,
 		BankAccountNumber,
-		SocialMedia
-	}
+		SocialMedia,
+        HotLines,
+		MapLocation,
+    }
 }

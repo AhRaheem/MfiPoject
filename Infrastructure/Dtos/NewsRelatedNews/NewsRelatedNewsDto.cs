@@ -14,7 +14,11 @@ namespace Infrastructure.Dtos.NewsRelatedNews
         [TranslateDisplay]
         public string? RelatedNewsId { get; set; }
         [TranslateDisplay]
-        public virtual Core.Entites.News? RelatedNews { get; set; }
+        public string? RelatedNewsName { get; set; }
+        [TranslateDisplay]
+        public string? RelatedNewsFileId { get; set; }
+        [TranslateDisplay]
+        public string? RelatedNewsFileExtention { get; set; }
         [TranslateDisplay]
         public string? NewsId { get; set; }
     }

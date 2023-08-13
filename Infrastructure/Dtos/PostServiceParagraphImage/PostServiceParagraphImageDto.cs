@@ -11,6 +11,8 @@ namespace Infrastructure.Dtos.PostServiceParagraphImage
         [TranslateDisplay]
         public string? FileId { get; set; }
         [TranslateDisplay]
+        public string? FileExtention { get; set; }
+        [TranslateDisplay]
         public string? PostServiceParagraphId { get; set; }
         [TranslateDisplay]
         public virtual PostServiceParagraphDto? PostServiceParagraph { get; set; }

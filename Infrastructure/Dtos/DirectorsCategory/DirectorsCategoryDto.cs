@@ -15,7 +15,7 @@ namespace Infrastructure.Dtos.DirectorsCategory
         [TranslateDisplay]
         public string? FileId { get; set; }
         [TranslateDisplay]
-        public IFormFile? File { get; set; }
-        public ICollection<DirectorsDto> Directors { get; set; }
+        public string? FileExtention { get; set; }
+        public ICollection<DirectorsDto>? Directors { get; set; }
     }
 }

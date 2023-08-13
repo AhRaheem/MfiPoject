@@ -6,6 +6,7 @@ using Infrastructure.Dtos.ProfileInfo;
 using Infrastructure.Services.Contracts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Api.Enums;
 
 namespace Api.Controllers
 {
@@ -29,9 +30,9 @@ namespace Api.Controllers
         }
 
         [HttpGet("GetAll")]
-        public async Task<ActionResult<List<ProtocolDto>>> GetAll(int Page=1)
+        public async Task<ActionResult<List<ProtocolDto>>> GetAll(DateTime? FromDate, DateTime? ToDate, string q = "", SortByType SortByTypeFlag = 0, int Page = 1, int Size = 9)
         {
-            var Data = await _ProtocolService.GetAll(page: Page, size: 6);
+            var Data = await _ProtocolService.GetAll(FromDate, ToDate, q, Page, Size);
             return Ok(Data);
         }
     }

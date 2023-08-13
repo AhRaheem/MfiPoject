@@ -20,9 +20,9 @@ namespace Web.Controllers
         }
 
 		// GET: AchievementController
-		public async Task<ActionResult> Index(string? q,int page=1, int size=10)
+		public async Task<ActionResult> Index(string? q,int Page=1, int Size=10)
 		{
-			return View(await _AchievementService.GetAll(q,page,size));
+			return View(await _AchievementService.GetAll(q:q,page:Page,size:Size));
 		}
 
 		// GET: AchievementController/Create

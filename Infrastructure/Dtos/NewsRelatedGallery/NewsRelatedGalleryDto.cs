@@ -14,7 +14,11 @@ namespace Infrastructure.Dtos.NewsRelatedGallery
         [TranslateDisplay]
         public string? RelatedGalleryId { get; set; }
         [TranslateDisplay]
-        public virtual Core.Entites.Gallery? RelatedGallery { get; set; }
+        public string? RelatedGalleryName { get; set; }
+        [TranslateDisplay]
+        public string? RelatedGalleryFileId { get; set; }
+        [TranslateDisplay]
+        public string? RelatedNewsFileExtention { get; set; }
         [TranslateDisplay]
         public string? NewsId { get; set; }
     }

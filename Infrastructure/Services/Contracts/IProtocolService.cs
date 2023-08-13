@@ -14,7 +14,7 @@ namespace Infrastructure.Services.Contracts
 
 		Task<bool> Delete(string Id);
 
-		Task<PaginatedList<ProtocolDto>> GetAll(string q= "", int page = 1, int size = 10);
+		Task<PaginatedList<ProtocolDto>> GetAll(DateTime? FromDate = null, DateTime? ToDate = null, string q = "", int page = 1, int size = 10);
 
 		Task<ProtocolDto> GetById(string Id);
         Task<ProtocolDto> GetByArName(string Name);

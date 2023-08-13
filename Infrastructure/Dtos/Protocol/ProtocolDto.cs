@@ -16,6 +16,8 @@ namespace Infrastructure.Dtos.Protocol
         [TranslateDisplay]
         public string? MainFileId { get; set; }
         [TranslateDisplay]
+        public string? FileExtention { get; set; }
+        [TranslateDisplay]
         public string? TitleAr { get; set; }
         [TranslateDisplay]
         public string? TitleEn { get; set; }

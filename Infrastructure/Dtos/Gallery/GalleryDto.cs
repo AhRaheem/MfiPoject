@@ -17,6 +17,8 @@ namespace Infrastructure.Dtos.Gallery
         public string? TitleEn { get; set; }
         [TranslateDisplay("Published")]
         public bool IsPublished { get; set; }
-		public ICollection<GalleryItemDto>? Items { get; set; }
+        [TranslateDisplay]
+        public DateTime CreatedOn { get; set; }
+        public ICollection<GalleryItemDto>? Items { get; set; }
     }
 }

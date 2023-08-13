@@ -36,7 +36,7 @@ namespace Infrastructure.Services
 			return (await _unitOfWork.Save()) > 0;
 		}
 
-		public async Task<PaginatedList<ProtocolDto>> GetAll(string q = "", DateTime? FromDate, DateTime? ToDate, int page = 1, int size = 10)
+		public async Task<PaginatedList<ProtocolDto>> GetAll(DateTime? FromDate = null, DateTime? ToDate = null, string q = "", int page = 1, int size = 10)
 		{
 			var Qry = _unitOfWork.Protocol.GetAllQuery(predicate: x => !x.IsDeleted, page: page, size: size);
 			if (!string.IsNullOrWhiteSpace(q))

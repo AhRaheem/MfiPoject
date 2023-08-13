@@ -10,9 +10,9 @@ namespace Infrastructure.Dtos.Partner
 		public PartnerCategoryDto? PartnerCategory { get; set; }
 		[TranslateDisplay("File")]
 		public string? FileId { get; set; }
-		[TranslateDisplay]
-		public FileDto? File { get; set; }
-		[TranslateDisplay("Arabic Name")]
+        [TranslateDisplay]
+        public string? FileExtention { get; set; }
+        [TranslateDisplay("Arabic Name")]
 		public string? NameAr { get; set; }
         [TranslateDisplay("English Name")]
         public string? NameEn { get; set; }
