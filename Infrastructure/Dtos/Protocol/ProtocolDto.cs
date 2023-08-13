@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Infrastructure.Dtos.NewsRelatedGallery;
+using Infrastructure.Dtos.NewsRelatedNews;
+using Infrastructure.Dtos.PostArticleParagraph;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +13,16 @@ namespace Infrastructure.Dtos.Protocol
     {
         [TranslateDisplay]
         public string? Id { get; set; }
+        [TranslateDisplay]
+        public string? MainFileId { get; set; }
+        [TranslateDisplay]
+        public string? TitleAr { get; set; }
+        [TranslateDisplay]
+        public string? TitleEn { get; set; }
+        [TranslateDisplay]
+        public string? IntroAr { get; set; }
+        [TranslateDisplay]
+        public string? IntroEn { get; set; }
         [TranslateDisplay]
         public PostState PostState { get; set; }
         [TranslateDisplay]
@@ -24,15 +37,13 @@ namespace Infrastructure.Dtos.Protocol
         public DateTime? BreakingTo { get; set; }
         [TranslateDisplay]
         public bool Titled { get; set; }
+
+        public virtual ICollection<PostArticleParagraphDto>? PostArticleParagraphs { get; set; }
+        public virtual ICollection<PostAffiliateLawDto>? AffiliateLaws { get; set; }
+
+        public virtual ICollection<NewsRelatedNewsDto>? NewsRelatedNews { get; set; }
+        public virtual ICollection<NewsRelatedGalleryDto>? NewsRelatedGalleries { get; set; }
         [TranslateDisplay]
-        public string? MainFileId { get; set; }
-        [TranslateDisplay]
-        public string? TitleAr { get; set; }
-        [TranslateDisplay]
-        public string? TitleEn { get; set; }
-        [TranslateDisplay]
-        public string? IntroAr { get; set; }
-        [TranslateDisplay]
-        public string? IntroEn { get; set; }
+        public DateTime CreatedOn { get; set; }
     }
 }

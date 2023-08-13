@@ -74,5 +74,14 @@ namespace Infrastructure.Services
             var Entity = await _unitOfWork.DirectorsCategory.Get(x => x.NameEn == Name);
             return _mapper.Map<DirectorsCategoryDto>(Entity);
         }
+
+        public async Task<PaginatedList<DirectorsCategoryDto>> GetAllWithSubData(string q = "", int page = 1, int size = 10)
+        {
+            var Qry = _unitOfWork.DirectorsCategory.GetAllQuery(predicate: x => !x.IsDeleted,include: x=>x.Include(d=>d.Directors), page: page, size: size);
+            if (!string.IsNullOrWhiteSpace(q))
+                Qry = Qry.Where(x => x.NameAr.Contains(q) || x.NameEn.Contains(q));
+            return await Qry.ProjectTo<DirectorsCategoryDto>(_mapper.ConfigurationProvider)
+                .PaginatedListAsync(page, size);
+        }
     }
 }

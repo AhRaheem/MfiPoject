@@ -13,7 +13,7 @@ namespace Infrastructure.Services.Contracts
 
 		Task<bool> Delete(string Id);
 
-		Task<PaginatedList<AchievementDto>> GetAll(string q= "", int page = 1, int size = 10);
+		Task<PaginatedList<AchievementDto>> GetAll(string q= "", DateTime? FromDate, DateTime? ToDate, int page = 1, int size = 10);
 
 		Task<AchievementDto> GetById(string Id);
         Task<AchievementDto> GetByArName(string Name);

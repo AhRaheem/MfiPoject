@@ -11,5 +11,6 @@ namespace Core.Entites
         public string? NameAr { get; set; }
         public string? NameEn { get; set; }
         public string? FileId { get; set; }
+        public virtual ICollection<Directors>? Directors { get; set; }
     }
 }

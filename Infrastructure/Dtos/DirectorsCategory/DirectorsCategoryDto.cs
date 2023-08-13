@@ -1,5 +1,7 @@
 ﻿
 
+using Infrastructure.Dtos.Directors;
+
 namespace Infrastructure.Dtos.DirectorsCategory
 {
 	public class DirectorsCategoryDto : IMapFrom<Core.Entites.DirectorsCategory>
@@ -14,5 +16,6 @@ namespace Infrastructure.Dtos.DirectorsCategory
         public string? FileId { get; set; }
         [TranslateDisplay]
         public IFormFile? File { get; set; }
+        public ICollection<DirectorsDto> Directors { get; set; }
     }
 }

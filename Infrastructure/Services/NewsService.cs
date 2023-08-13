@@ -35,12 +35,16 @@ namespace Infrastructure.Services
 			return (await _unitOfWork.Save()) > 0;
 		}
 
-		public async Task<PaginatedList<NewsDto>> GetAll(string q = "", int page = 1, int size = 10)
+		public async Task<PaginatedList<NewsDto>> GetAll(string q = "", DateTime? FromDate, DateTime? ToDate, int page = 1, int size = 10)
 		{
 			var Qry = _unitOfWork.News.GetAllQuery(predicate: x => !x.IsDeleted, page: page, size: size);
 			if (!string.IsNullOrWhiteSpace(q))
 				Qry = Qry.Where(x => x.TitleAr.Contains(q) || x.TitleEn.Contains(q));
-			return await Qry.ProjectTo<NewsDto>(_mapper.ConfigurationProvider)
+            if (FromDate.HasValue || FromDate.Value > DateTime.MinValue)
+                Qry = Qry.Where(x => x.CreatedOn >= FromDate);
+            if (ToDate.HasValue || ToDate.Value > DateTime.MinValue)
+                Qry = Qry.Where(x => x.CreatedOn <= ToDate);
+            return await Qry.ProjectTo<NewsDto>(_mapper.ConfigurationProvider)
 				.PaginatedListAsync(page, size);
 		}
 

@@ -9,8 +9,8 @@ namespace Infrastructure.Dtos.Gallery
 		public string? Id { get; set; }
 		[TranslateDisplay("File")]
 		public string? MainFileId { get; set; }
-        [TranslateDisplay("File")]
-        public FileDto? MainFile { get; set; }
+        [TranslateDisplay("FileExtention")]
+        public string? FileExtention { get; set; }
 		[TranslateDisplay("Arabic Name")]
 		public string? TitleAr { get; set; }
         [TranslateDisplay("English Name")]

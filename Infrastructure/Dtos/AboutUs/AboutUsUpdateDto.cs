@@ -36,5 +36,13 @@ namespace Infrastructure.Dtos.AboutUs
         public string? MissionWordEn { get; set; }
         [TranslateDisplay]
         public string? MissionImageId { get; set; }
+        [TranslateDisplay]
+        public string? CeoNameAr { get; set; }
+        [TranslateDisplay]
+        public string? CeoNameEn { get; set; }
+        [TranslateDisplay]
+        public string? ChairmanAr { get; set; }
+        [TranslateDisplay]
+        public string? ChairmanEn { get; set; }
     }
 }

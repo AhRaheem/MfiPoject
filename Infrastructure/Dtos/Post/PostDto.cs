@@ -11,7 +11,7 @@
 		//[TranslateDisplay("File")]
   //      public virtual string? MainFileId { get; set; }
   //      [TranslateDisplay("File")]
-  //      public FileDto? MainFile { get; set; }
+  //      public string? FileExtention { get; set; }
   //      [TranslateDisplay("Arabic Title")]
   //      public string? TitleAr { get; set; }
   //      [TranslateDisplay("English Title")]
